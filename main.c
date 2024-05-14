@@ -46,8 +46,7 @@ bool verfBorderV2(char *str)
 {
     if (!str)
         return (0);
-    // linge de 
-    if ((str[ft_strlen(str) - 2] && str[ft_strlen(str) - 2] != 49) || (str[0] && str[0] != 49))
+    if (ft_strlen(str) < 3 ||  (str[ft_strlen(str) - 2] && str[ft_strlen(str) - 2] != 49) || (str[0] && str[0] != 49))
         return (0);
     return (1);
 }
