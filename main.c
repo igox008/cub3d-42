@@ -46,10 +46,9 @@ bool verfBorderV2(char *str)
 {
     if (!str)
         return (0);
-    printf("----------[%c]---------\n",str[ft_strlen(str) - 2]);
-    // exit(0);
-    // if (str[ft_strlen(str) - 2] != 49 || str[0] != 49)
-    //     return (0);
+    // linge de 
+    if ((str[ft_strlen(str) - 2] && str[ft_strlen(str) - 2] != 49) || (str[0] && str[0] != 49))
+        return (0);
     return (1);
 }
 
@@ -68,7 +67,7 @@ bool    checkContentFile(int  *fd)
             return (0);
         str = str1;
     }
-    if (!verfBorder(str1))
+    if (!verfBorder(str))
         return (0);
     return (1);
 }
