@@ -1,5 +1,5 @@
 NAME = cub3d
-SRCS = 
+SRCS = ./parcing/g_col.c ./main.c ./parcing/get_next_line.c ./parcing/libft.c
 OBJS    = $(SRCS:.c=.o)
 
 CFLAGS 	=   -Wall -Wextra -Werror
