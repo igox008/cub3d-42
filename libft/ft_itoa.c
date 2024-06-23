@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 04:39:57 by alaassir          #+#    #+#             */
-/*   Updated: 2024/03/28 21:49:17 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/06/23 06:08:21 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ char	*ft_itoa(int n)
 
 	i = 0;
 	if (n == -2147483648)
-		return (ft_strdup("-2147483648", MALLOC_S));
+		return (ft_strdup("-2147483648", MALLOC));
 	len = n_len(n);
-	num = (char *)g_malloc(len + 1, MALLOC_S);
+	num = (char *)g_malloc(len + 1, MALLOC);
 	if (num == NULL)
 		return (NULL);
 	if (n < 0)

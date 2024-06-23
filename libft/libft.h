@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:28:39 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:13:15 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/06/23 05:26:56 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int		ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		count_w(char const *s, char *del);
+int		ft_all_digit(char *s);
 
 #endif

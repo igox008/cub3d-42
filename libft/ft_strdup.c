@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 10:08:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/03/29 23:44:31 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/06/23 04:45:22 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strdup(const char *s1, t_call call)
 	char	*str;
 
 	i = 0;
+	if (!s1)
+		return (NULL);
 	len = ft_strlen(s1);
 	str = (char *)g_malloc(len + 1, call);
 	if (str == NULL)

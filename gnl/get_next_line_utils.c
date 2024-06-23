@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 04:54:58 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:16:18 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/06/23 06:19:43 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,24 +81,10 @@ void	get_rmn(char *dst, char *src, int check)
 
 char	*ft_free(char **line, char **next, char **buff, int check)
 {
-	if (check == 0 && *line)
-		return (free(*line), *line = NULL, NULL);
-	else if (check == 1 && *next)
-		return (free(*next), *next = NULL, NULL);
-	else if (check == 2)
-		return (free(*buff), *buff = NULL, NULL);
-	else if (check == 3)
-		return (free(*next), *next = NULL, free(*line), \
-			*line = NULL, NULL);
-	else if (check == 4)
-		return (free(*line), free(*buff), *line = NULL, \
-			*buff = NULL, NULL);
-	else if (check == 5)
-		return (free(*next), free(*buff), *next = NULL, \
-			*buff = NULL, NULL);
-	else if (check == -1)
-		return (free(*buff), free(*line), free(*next), \
-		*buff = NULL, *line = NULL, *next = NULL, NULL);
+	(void)line;
+	(void)next;
+	(void)buff;
+	(void)check;
 	return (NULL);
 }
 

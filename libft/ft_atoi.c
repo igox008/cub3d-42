@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 08:42:06 by alaassir          #+#    #+#             */
-/*   Updated: 2024/04/01 09:32:09 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/06/23 06:49:46 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_atoi(const char *str)
 	int				s;
 	unsigned long	rsl;
 
-	i = 0;
-	s = 1;
-	rsl = 0;
+	(i = 0, s = 1, rsl = 0);
+	// if (!str)
+	// 	return (-1);
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		i++;
 	if (str[i] == '+' || str[i] == '-')

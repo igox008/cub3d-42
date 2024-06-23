@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 02:14:14 by alaassir          #+#    #+#             */
-/*   Updated: 2024/05/30 16:27:17 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/06/23 09:22:02 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*ft_strndup(const char *s1, int n)
 	char	*new;
 
 	i = 0;
-	new = (char *)g_malloc(n + 1, MALLOC_S);
+	new = (char *)g_malloc(n + 1, MALLOC);
 	if (!new)
 		return (NULL);
 	while (i < n)
@@ -60,8 +60,8 @@ char	**ft_split(char const *s, char *del)
 
 	if (!s)
 		return (NULL);
-	(1) && (wc = count_w(s, del), index = -1);
-	arr = g_malloc((sizeof(char *)) * (wc + 1), MALLOC_S);
+	(wc = count_w(s, del), index = -1);
+	arr = g_malloc((sizeof(char *)) * (wc + 1), MALLOC);
 	if (!arr)
 		return (NULL);
 	while (++index < wc)

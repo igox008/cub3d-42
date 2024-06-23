@@ -18,19 +18,23 @@ BG_CYAN=\033[46m
 BG_WHITE=\033[47m
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -fsanitize=address -g -Wall -Werror -Wextra
 RM = rm -rf
 
+
+LIBDIR = libft
+LIBFT = -I$(LIBDIR) -L$(LIBDIR) -lft
 NAME = cub3d
 MAND_INCLUDES = libft/libft.h includes/cub3d.h g_col/g_collector.h gnl/get_next_line.h
-MAND_SRC = cub3d.c parsing/parse00.c g_col/g_collector.c gnl/get_next_line.c gnl/get_next_line_utils.c
+MAND_SRC = cub3d.c parsing/parse00.c g_col/g_collector.c gnl/get_next_line.c gnl/get_next_line_utils.c parsing/parse_utils01.c \
+			parsing/parse_utils00.c parsing/parse01.c
 MAND_OBJ = $(MAND_SRC:.c=.o)
 
 all : $(NAME)
 
 $(NAME) : $(MAND_OBJ) $(MAND_INCLUDES) make_libft
 	@echo "$(ORANGE)$(BOLD)building $@...$(RESET)"
-	@$(CC) $(CFLAGS) $(MAND_OBJ) -o $@
+	@$(CC) $(CFLAGS) $(MAND_OBJ) -o $@ $(LIBFT)
 	@echo "$(GREEN)$@ is ready to use$(RESET)"
 
 %.o : %.c $(MAND_INCLUDES)
