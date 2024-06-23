@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:31:54 by alaassir         ###   ########.fr       */
+/*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
+/*   Updated: 2024/06/10 02:32:54 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "includes/cub3d.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <limits.h>
-#include "../g_col/g_collector.h"
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_game
+int	main(int ac, char **av)
 {
-    char    **map;
-}   t_game;
+	t_game	game;
 
-bool	parcing(char *file, t_game *game);
-
-#endif
+	game.map = NULL;
+	if (ac != 2)
+		return (printf("invalid arg\n"));
+	if (!parcing(av[1], &game))
+		return (1);
+	g_malloc(0, FREE);
+	return (0);
+}

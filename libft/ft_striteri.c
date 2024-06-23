@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:31:54 by alaassir         ###   ########.fr       */
+/*   Created: 2023/11/02 05:59:29 by alaassir          #+#    #+#             */
+/*   Updated: 2023/11/02 06:03:44 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <limits.h>
-#include "../g_col/g_collector.h"
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_game
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-    char    **map;
-}   t_game;
+	unsigned int	i;
+	unsigned int	len;
 
-bool	parcing(char *file, t_game *game);
-
-#endif
+	if (s && f)
+	{
+		i = 0;
+		len = ft_strlen(s);
+		while (i < len)
+		{
+			f(i, &s[i]);
+			i++;
+		}
+	}
+}

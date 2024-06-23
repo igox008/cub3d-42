@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:31:54 by alaassir         ###   ########.fr       */
+/*   Created: 2023/11/01 10:08:05 by alaassir          #+#    #+#             */
+/*   Updated: 2024/03/29 23:44:31 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <limits.h>
-#include "../g_col/g_collector.h"
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_game
+char	*ft_strdup(const char *s1, t_call call)
 {
-    char    **map;
-}   t_game;
+	size_t	i;
+	size_t	len;
+	char	*str;
 
-bool	parcing(char *file, t_game *game);
-
-#endif
+	i = 0;
+	len = ft_strlen(s1);
+	str = (char *)g_malloc(len + 1, call);
+	if (str == NULL)
+		return (NULL);
+	while (s1 && s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}

@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:31:54 by alaassir         ###   ########.fr       */
+/*   Created: 2023/11/01 08:29:15 by alaassir          #+#    #+#             */
+/*   Updated: 2024/03/28 02:18:59 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <limits.h>
-#include "../g_col/g_collector.h"
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_game
+char	*ft_strnstr(const char *str, const char *fnd, size_t len)
 {
-    char    **map;
-}   t_game;
+	size_t	i;
+	size_t	j;
 
-bool	parcing(char *file, t_game *game);
-
-#endif
+	i = 0;
+	if (ft_strlen(fnd) == 0)
+		return ((char *)str);
+	else if (!str && !len)
+		return (NULL);
+	while (str[i] && i < len)
+	{
+		j = 0;
+		while (str[i + j] == fnd[j] && fnd[j] && i + j < len)
+			j++;
+		if (fnd[j] == '\0')
+			return ((char *)(str + i));
+		i++;
+	}
+	return (NULL);
+}

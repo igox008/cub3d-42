@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:31:54 by alaassir         ###   ########.fr       */
+/*   Created: 2023/11/02 17:37:51 by alaassir          #+#    #+#             */
+/*   Updated: 2023/11/04 08:38:10 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <limits.h>
-#include "../g_col/g_collector.h"
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_game
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-    char    **map;
-}   t_game;
+	size_t	i;
+	size_t	s_len;
 
-bool	parcing(char *file, t_game *game);
-
-#endif
+	i = 0;
+	s_len = ft_strlen(src);
+	if (dstsize == 0)
+		return (s_len);
+	while (src[i] && i < dstsize - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (s_len);
+}

@@ -18,39 +18,38 @@ BG_CYAN=\033[46m
 BG_WHITE=\033[47m
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
-NAME =  cub3d #exec
-INCLUDES = includes/cub3d.h   includes/structs.h
-SRC = main.c parcing/g_col.c parcing/get_next_line.c parcing/libft.c
-OBJ = $(SRC:.c=.o)
+NAME = cub3d
+MAND_INCLUDES = libft/libft.h includes/cub3d.h g_col/g_collector.h gnl/get_next_line.h
+MAND_SRC = cub3d.c parsing/parse00.c g_col/g_collector.c gnl/get_next_line.c gnl/get_next_line_utils.c
+MAND_OBJ = $(MAND_SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) $(INCLUDES)
+$(NAME) : $(MAND_OBJ) $(MAND_INCLUDES) make_libft
 	@echo "$(ORANGE)$(BOLD)building $@...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) -o $@
+	@$(CC) $(CFLAGS) $(MAND_OBJ) -o $@
 	@echo "$(GREEN)$@ is ready to use$(RESET)"
 
-%.o : %.c $(INCLUDES)
+%.o : %.c $(MAND_INCLUDES)
 	@printf "$(YELLOW)$(BOLD)compiling %s...$(RESET)" "$<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "\r"
 	@printf "\033[2K\r"
 
 clean :
-	@$(RM) $(OBJ)
+	@make -C libft/ clean
+	@$(RM) $(MAND_OBJ)
 
 fclean : clean
+	@make -C libft/ fclean
 	@$(RM) $(NAME)
+
+make_libft :
+	@make -C libft/
 
 re : fclean all
 
-run : all clean
-	@read -p "Enter arguments: " INPUT && \
-	ARG=$$INPUT && \
-	./$(NAME) $$ARG || \
-	echo "$(RED)Error: wrong input$(RESET)"
-
-.PHONY : clean
+.PHONY : clean make_libft

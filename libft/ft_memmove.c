@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:31:54 by alaassir         ###   ########.fr       */
+/*   Created: 2023/11/02 17:37:13 by alaassir          #+#    #+#             */
+/*   Updated: 2023/11/02 17:37:22 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <limits.h>
-#include "../g_col/g_collector.h"
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_game
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-    char    **map;
-}   t_game;
+	size_t		i;
+	char		*d;
+	const char	*s;
 
-bool	parcing(char *file, t_game *game);
-
-#endif
+	d = (char *)dst;
+	s = (const char *)src;
+	i = 0;
+	if (d == s)
+		return (dst);
+	if (d > s && s + len > d)
+	{
+		while (++i <= len)
+			d[len - i] = s[len - i];
+	}
+	else
+	{
+		while (i < len)
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
+	return (dst);
+}

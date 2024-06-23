@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:31:54 by alaassir         ###   ########.fr       */
+/*   Created: 2023/11/01 02:38:00 by alaassir          #+#    #+#             */
+/*   Updated: 2023/11/01 04:12:49 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <limits.h>
-#include "../g_col/g_collector.h"
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_game
+char	*ft_strrchr(const char *s, int c)
 {
-    char    **map;
-}   t_game;
+	int	i;
 
-bool	parcing(char *file, t_game *game);
-
-#endif
+	i = ft_strlen(s) - 1;
+	if (s[i + 1] == (unsigned char)c)
+		return ((char *)(s + i + 1));
+	while (i >= 0)
+	{
+		if (s[i] == (unsigned char)c)
+			return ((char *)(s + i));
+		i--;
+	}
+	return (NULL);
+}
