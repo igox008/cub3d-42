@@ -18,7 +18,8 @@ BG_CYAN=\033[46m
 BG_WHITE=\033[47m
 
 CC = cc
-CFLAGS = -fsanitize=address -g -Wall -Werror -Wextra
+OFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+FLAGS = -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g
 RM = rm -rf
 
 
@@ -27,19 +28,20 @@ LIBFT = -I$(LIBDIR) -L$(LIBDIR) -lft
 NAME = cub3d
 MAND_INCLUDES = libft/libft.h includes/cub3d.h g_col/g_collector.h gnl/get_next_line.h
 MAND_SRC = cub3d.c parsing/parse00.c g_col/g_collector.c gnl/get_next_line.c gnl/get_next_line_utils.c parsing/parse_utils01.c \
-			parsing/parse_utils00.c parsing/parse01.c
+			parsing/parse_utils00.c parsing/parse01.c parsing/utils.c rayCasting/utils.c rayCasting/utils1.c
+
 MAND_OBJ = $(MAND_SRC:.c=.o)
 
 all : $(NAME)
 
 $(NAME) : $(MAND_OBJ) $(MAND_INCLUDES) make_libft
 	@echo "$(ORANGE)$(BOLD)building $@...$(RESET)"
-	@$(CC) $(CFLAGS) $(MAND_OBJ) -o $@ $(LIBFT)
+	@$(CC) $(FLAGS) $(MAND_OBJ) -o $@ $(LIBFT)
 	@echo "$(GREEN)$@ is ready to use$(RESET)"
 
 %.o : %.c $(MAND_INCLUDES)
 	@printf "$(YELLOW)$(BOLD)compiling %s...$(RESET)" "$<"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(OFLAGS) -c $< -o $@
 	@printf "\r"
 	@printf "\033[2K\r"
 
@@ -53,6 +55,7 @@ fclean : clean
 
 make_libft :
 	@make -C libft/
+
 
 re : fclean all
 
