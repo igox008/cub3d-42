@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/07/01 03:09:45 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/07/06 06:18:22 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct  s_game
 # define LEFT 0
 # define DOWN 1
 # define TILE_SIZE 20
+# define SPD 4
 
 # define PRPL 0x800080
 # define BLUE 0x0000FF
@@ -94,5 +95,7 @@ int		red_x(t_game *game);
 int		render_map(void *ptr);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		put_player(t_game *game, t_img *img);
+int		can_we_lr(int x, int y, char dir, t_game *game);
+int		can_we_ud(int x, int y, char dir, t_game *game);
 
 #endif

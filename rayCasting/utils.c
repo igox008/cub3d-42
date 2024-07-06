@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/07/01 19:35:38 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/07/06 06:18:34 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,25 @@ int	listen_hook(int keyp, t_game *game)
 		red_x(game);
 	}
 	else if (keyp == UP)
-		(game->map[(((game->p_pos.y) - 2) / TILE_SIZE)] \
-		[(game->p_pos.x + TILE_SIZE) / TILE_SIZE] != '1')
-		&& (game->p_pos.y -= 2);
+	{
+		if (can_we_ud(game->p_pos.x, game->p_pos.y, 'u', game) != -1)
+			game->p_pos.y -= SPD;
+	}
 	else if (keyp == DOWN)
-		(game->map[(((game->p_pos.y) + 2) / TILE_SIZE) + 1] \
-		[(game->p_pos.x + TILE_SIZE) / TILE_SIZE] != '1')
-		&& (game->p_pos.y += 2);
+	{
+		if (can_we_ud(game->p_pos.x, game->p_pos.y, 'd', game) != -1)
+			game->p_pos.y += SPD;
+	}
 	else if (keyp == LEFT)
-		(game->map[(game->p_pos.y + TILE_SIZE) / TILE_SIZE] \
-		[(((game->p_pos.x) - 2) / TILE_SIZE)] != '1')
-		&& (game->p_pos.x -= 2);
+	{
+		if (can_we_lr(game->p_pos.x, game->p_pos.y, 'l', game) != -1)
+			game->p_pos.x -= SPD;
+	}
 	else if (keyp == RIGHT)
-		(game->map[(game->p_pos.y + TILE_SIZE) / TILE_SIZE] \
-		[(((game->p_pos.x) + 2) / TILE_SIZE) + 1] != '1')
-		&& (game->p_pos.x += 2);
+	{
+		if (can_we_lr(game->p_pos.x, game->p_pos.y, 'r', game) != -1)
+			game->p_pos.x += SPD;
+	}
 	return (keyp);
 }
 
