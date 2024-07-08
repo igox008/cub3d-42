@@ -1,3 +1,5 @@
 .vscode
 *.o
 *.tldr
+test.c
+a.out

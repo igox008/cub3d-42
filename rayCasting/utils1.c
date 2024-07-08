@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 03:01:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/07/06 06:18:40 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/07/08 04:22:06 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	can_we_lr(int x, int y, char dir, t_game *game)
 	coef = 1;
 	if (dir == 'l')
 		coef = -1;
-	while (y < game->p_pos.y + TILE_SIZE)
+	y += 4;
+	while (y < (game->p_pos.y + TILE_SIZE) - 4)
 	{
 		tmp = 2 * coef;
 		(dir == 'r') && (tmp += TILE_SIZE);
@@ -61,7 +62,8 @@ int	can_we_ud(int x, int y, char dir, t_game *game)
 	coef = 1;
 	if (dir == 'u')
 		coef = -1;
-	while (x < game->p_pos.x + TILE_SIZE)
+	x += 4;
+	while (x < (game->p_pos.x + TILE_SIZE) - 4)
 	{
 		tmp = 2 * coef;
 		(dir == 'd') && (tmp += TILE_SIZE);
