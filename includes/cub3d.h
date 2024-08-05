@@ -22,7 +22,7 @@
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
 #include <fcntl.h>
-#include <mlx.h>
+#include "../minilibx-linux/mlx.h"
 
 typedef struct s_rgb
 {
@@ -65,15 +65,14 @@ typedef struct  s_game
 	int		w;
 	t_corr	p_pos;
 }   t_game;
-
 # define ESC 53
 # define UP 13
 # define RIGHT 2
 # define LEFT 0
 # define DOWN 1
-# define TILE_SIZE 20
+# define TILE_SIZE 64
 # define SPD 4
-
+# define PI 3.1415927
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
