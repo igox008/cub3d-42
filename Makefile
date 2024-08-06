@@ -18,7 +18,7 @@ BG_CYAN=\033[46m
 BG_WHITE=\033[47m
 
 CC = cc
-OFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+# OFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 FLAGS = -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g
 RM = rm -rf
 
@@ -27,7 +27,7 @@ LIBDIR = libft
 LIBFT = -I$(LIBDIR) -L$(LIBDIR) -lft
 NAME = cub3d
 MAND_INCLUDES = libft/libft.h includes/cub3d.h g_col/g_collector.h gnl/get_next_line.h
-MAND_SRC = cub3d.c parsing/parse00.c g_col/g_collector.c gnl/get_next_line.c gnl/get_next_line_utils.c parsing/parse_utils01.c \
+MAND_SRC = rayCasting/rycasting.c  rayCasting/draw.c cub3d.c parsing/parse00.c g_col/g_collector.c gnl/get_next_line.c gnl/get_next_line_utils.c parsing/parse_utils01.c \
 			parsing/parse_utils00.c parsing/parse01.c parsing/utils.c rayCasting/utils.c rayCasting/utils1.c
 
 MAND_OBJ = $(MAND_SRC:.c=.o)

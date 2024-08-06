@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/07/06 06:18:22 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/06 06:13:17 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
@@ -22,7 +21,50 @@
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
 #include <fcntl.h>
-#include <mlx.h>
+#include "../minilibx-linux/mlx.h"
+#include <stdio.h>
+#include <math.h>
+# define PI 3.1415927
+# define EPS_IN_IFIC (SIGCHLD * (0x00008 + SIG_BLOCK ))
+# include <signal.h>
+# include <stdint.h>
+# define  NUM_RAYS 100  // windows width / TILE_SIZE
+# define FOV 60 * PI / 180
+
+typedef struct s___inet___ {
+    double_t x;
+    double_t y;
+} __inet_;
+
+typedef struct s___step___{
+    double_t x;
+    double_t y;
+} __step_;
+
+typedef struct s___hit___ {
+    double_t x;
+    double_t y;
+} __hit_;
+
+typedef struct s___rays
+{
+    __INT32_TYPE__ index;
+    double_t       disatnce;
+    __inet_         coord_init;
+    __step_         coord_step;
+    __hit_          coord_hit;
+	double_t		angle_ray;
+}__rays_;
+
+typedef struct s______globl_
+{
+    __INT32_TYPE__ facing_down;
+    __INT32_TYPE__ facing_up ;
+    __INT32_TYPE__ facing_right;
+    __INT32_TYPE__ facing_left;
+    double_t angle_veiw;
+} __globl_;
+
 
 typedef struct s_rgb
 {
@@ -64,20 +106,30 @@ typedef struct  s_game
 	int		h;
 	int		w;
 	t_corr	p_pos;
+	t_img	*img;
 }   t_game;
+
+typedef struct s__General
+{
+		__globl_ *global;
+		__rays_		*ray;
+		t_game		*game;
+		t_img		*img;
+}t_General;
 
 # define ESC 53
 # define UP 13
 # define RIGHT 2
 # define LEFT 0
 # define DOWN 1
-# define TILE_SIZE 20
+# define TILE_SIZE 64
 # define SPD 4
-
+# define PI 3.1415927
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
-
+t_img	img;
+void    castAllrays(t_game *game, __globl_ *data,t_General *gnl);
 bool	parcing(char *file, t_game *game);
 char	*till_char(char *line);
 bool	ft_isspace(char c);
@@ -97,5 +149,10 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		put_player(t_game *game, t_img *img);
 int		can_we_lr(int x, int y, char dir, t_game *game);
 int		can_we_ud(int x, int y, char dir, t_game *game);
+void castRay(__rays_ *ray,t_game *game,__globl_ *data);
+void    ray_facing(__rays_ *ray, __globl_ *data);
+void _daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
 
+
+bool hit_wall(__INT32_TYPE__ i,__INT32_TYPE__ j,char **str,t_game * game);
 #endif
