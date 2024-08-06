@@ -92,7 +92,7 @@ double_t horizontal_distance (t_game *game, __rays_ *ray,__globl_ *data)
     double_t step_next_x = ray->coord_init.x;
     double_t step_next_y = ray->coord_init.y;
 
-    while (true)
+    while ((step_next_x >= 0 &&  step_next_x <= game->w * TILE_SIZE) && (step_next_y >= 0 && step_next_y <= game->h * TILE_SIZE))
     {
         if (hit_wall(floor((step_next_y - data->facing_up) / TILE_SIZE), floor(step_next_x / TILE_SIZE),game->map,game))
         {
@@ -153,10 +153,11 @@ void    castAllrays(t_game *game, __globl_ *data,t_General *gnl)
 
     while (++i < NUM_RAYS)
     {
-        _daa_line(game->p_pos.x, game->p_pos.y,
-            cos(initAngle)* 100 + game->p_pos.x,
-            sin(initAngle)* 100 +  game->p_pos.y
-            , game);
+        // _daa
+    // _line(game->p_pos.x, game->p_pos.y,
+        //     cos(initAngle)* 100 + game->p_pos.x,
+        //     sin(initAngle)* 100 +  game->p_pos.y
+            // , game);
         ray = malloc (sizeof(__rays_));
             if (!ray)   return ;
         initAngle = angle_base(initAngle);
