@@ -32,7 +32,7 @@ void _daa_line(int X0, int Y0, int X1, int Y1,t_game *game)
     float X = X0; 
     float Y = Y0; 
     for (int i = 0; i <= steps; i++) {
-        my_mlx_pixel_put(game->img, X, Y, color);
+        my_mlx_pixel_put(game->img,X,Y, color);
         X += Xinc; // increment in x at each step 
         Y += Yinc; // increment in y at each step 
         // delay(100); // for visualization of line- 

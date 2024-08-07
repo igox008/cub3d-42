@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/06 06:13:17 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/07 03:19:38 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@
 #include "../minilibx-linux/mlx.h"
 #include <stdio.h>
 #include <math.h>
-# define PI 3.1415927
 # define EPS_IN_IFIC (SIGCHLD * (0x00008 + SIG_BLOCK ))
 # include <signal.h>
 # include <stdint.h>
-# define  NUM_RAYS 100  // windows width / TILE_SIZE
-# define FOV 60 * PI / 180
+# define FOV 60 * M_PI / 180
 
 typedef struct s___inet___ {
     double_t x;
@@ -49,10 +47,10 @@ typedef struct s___hit___ {
 typedef struct s___rays
 {
     __INT32_TYPE__ index;
-    double_t       disatnce;
-    __inet_         coord_init;
-    __step_         coord_step;
-    __hit_          coord_hit;
+    double_t       distance;
+    __hit_          coord_hit_h;
+	__hit_          coord_hit_v;
+	__hit_          coord_hit;
 	double_t		angle_ray;
 }__rays_;
 
@@ -62,7 +60,7 @@ typedef struct s______globl_
     __INT32_TYPE__ facing_up ;
     __INT32_TYPE__ facing_right;
     __INT32_TYPE__ facing_left;
-    double_t angle_veiw;
+    double_t angle_view;
 } __globl_;
 
 
@@ -129,7 +127,7 @@ typedef struct s__General
 # define BLUE 0x0000FF
 # define GRAY 0x808080
 t_img	img;
-void    castAllrays(t_game *game, __globl_ *data,t_General *gnl);
+void	cast_all_rays(t_game *game, __globl_ *data);
 bool	parcing(char *file, t_game *game);
 char	*till_char(char *line);
 bool	ft_isspace(char c);
@@ -154,5 +152,5 @@ void    ray_facing(__rays_ *ray, __globl_ *data);
 void _daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
 
 
-bool hit_wall(__INT32_TYPE__ i,__INT32_TYPE__ j,char **str,t_game * game);
+// bool hit_wall(__INT32_TYPE__ i,__INT32_TYPE__ j,char **str,t_game * game);
 #endif

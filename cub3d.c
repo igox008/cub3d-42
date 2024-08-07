@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/06 07:18:24 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/07 03:04:19 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ bool	mlx_engine(t_game *game)
 int driver(t_game *game) {
 	t_General *gnl;
 	__globl_ *data = malloc(sizeof(__globl_));
-	data->angle_veiw =  M_PI;
+	
 
 	render_map(game);
-	castAllrays(game, data, gnl);
+	cast_all_rays(game, data);
 	mlx_put_image_to_window(game->ptr, game->win, game->img->img, 0, 0);
 	return (0);
 }
@@ -64,13 +64,10 @@ int	main(int ac, char **av)
 		return (g_malloc(0, FREE), 1);
 	mlx_hook(game.win, 17, 1L << 0, red_x, &game);
 	mlx_hook(game.win, 2, 1L << 0, listen_hook, &game);
-	mlx_loop_hook(game.ptr, driver, &game);      
-
-	// castAllrays(&game,data,gnl);
-
-		
-	mlx_loop(game.ptr);
-	
+	mlx_loop_hook(game.ptr, driver, &game);
+	__globl_ *data = malloc(sizeof(__globl_));
+	   
+	mlx_loop(game.ptr);	
 	g_malloc(0, FREE);
 	return (0);
 }
