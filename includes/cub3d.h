@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/08 09:47:11 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:35:02 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <float.h>
 #include <unistd.h>
 #include <limits.h>
 #include "../g_col/g_collector.h"

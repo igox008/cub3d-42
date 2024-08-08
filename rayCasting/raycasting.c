@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/08 09:18:58 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:36:09 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ double_t	horizontal_distance(t_game *game, __rays_ *ray, __globl_ *data)
 	if (var.found_horz_wal_hit)
 		return (dis_between_to_points(game->p_pos.x, game->p_pos.y, \
 			ray->coord_hit_h.x, ray->coord_hit_h.y));
-	return (INT_MAX);
+	return (DBL_MAX);
 }
 
 double_t	vertical_distance(t_game *game, __rays_ *ray, __globl_ *data)
@@ -63,7 +63,7 @@ double_t	vertical_distance(t_game *game, __rays_ *ray, __globl_ *data)
 	if (var.found_vert_wal_hit)
 		return (dis_between_to_points(game->p_pos.x, game->p_pos.y, \
 		ray->coord_hit_v.x, ray->coord_hit_v.y));
-	return (INT_MAX);
+	return (DBL_MAX);
 }
 
 void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data)
@@ -91,7 +91,7 @@ __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)
 	__INT32_TYPE__		i;
 	__INT32_TYPE__		num_rays;
 
-	(1) && (data->angle_view = 0, i = -1, init_angle = data->angle_view \
+	(1) && (data->angle_view = -PI / 2, i = -1, init_angle = data->angle_view \
 		- (FOV / 2), num_rays = game->w * TILE_SIZE);
 	ray = malloc (sizeof(__rays_));
 	if (!ray)
