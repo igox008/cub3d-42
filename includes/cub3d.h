@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/07 03:19:38 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/08 08:24:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,6 @@ typedef struct s___hit___ {
     double_t y;
 } __hit_;
 
-typedef struct s___rays
-{
-    __INT32_TYPE__ index;
-    double_t       distance;
-    __hit_          coord_hit_h;
-	__hit_          coord_hit_v;
-	__hit_          coord_hit;
-	double_t		angle_ray;
-}__rays_;
-
 typedef struct s______globl_
 {
     __INT32_TYPE__ facing_down;
@@ -62,6 +52,18 @@ typedef struct s______globl_
     __INT32_TYPE__ facing_left;
     double_t angle_view;
 } __globl_;
+
+typedef struct s___rays
+{
+    __INT32_TYPE__ index;
+    double_t       distance;
+    __hit_          coord_hit_h;
+	__hit_          coord_hit_v;
+	__hit_          coord_hit;
+	double_t		angle_ray;
+	__globl_		*data;
+}__rays_;
+
 
 
 typedef struct s_rgb
@@ -127,7 +129,6 @@ typedef struct s__General
 # define BLUE 0x0000FF
 # define GRAY 0x808080
 t_img	img;
-void	cast_all_rays(t_game *game, __globl_ *data);
 bool	parcing(char *file, t_game *game);
 char	*till_char(char *line);
 bool	ft_isspace(char c);
@@ -147,10 +148,10 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		put_player(t_game *game, t_img *img);
 int		can_we_lr(int x, int y, char dir, t_game *game);
 int		can_we_ud(int x, int y, char dir, t_game *game);
-void castRay(__rays_ *ray,t_game *game,__globl_ *data);
-void    ray_facing(__rays_ *ray, __globl_ *data);
-void _daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
 
 
-// bool hit_wall(__INT32_TYPE__ i,__INT32_TYPE__ j,char **str,t_game * game);
+__INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);
+void			ray_facing(__rays_ *ray, __globl_ *data);
+void			castRay(__rays_ *ray,t_game *game,__globl_ *data);
+void			_daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
 #endif
