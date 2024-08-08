@@ -6,11 +6,11 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/07 03:34:58 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:18:54 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "includes/cub3d.h"
 
 int	red_x(t_game *game)
 {

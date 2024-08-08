@@ -6,11 +6,11 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 03:01:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/06 03:36:03 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:19:05 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "./includes/cub3d.h"
 
 int	put_player(t_game *game, t_img *img)
 {
