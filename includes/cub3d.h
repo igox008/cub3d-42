@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/08 08:24:33 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/08 09:47:11 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,31 @@
 # include <stdint.h>
 # define FOV 60 * M_PI / 180
 
-typedef struct s___inet___ {
+typedef struct s___point___ 
+{
     double_t x;
     double_t y;
-} __inet_;
-
-typedef struct s___step___{
-    double_t x;
-    double_t y;
-} __step_;
-
-typedef struct s___hit___ {
-    double_t x;
-    double_t y;
-} __hit_;
+} __point_;
 
 typedef struct s______globl_
 {
-    __INT32_TYPE__ facing_down;
-    __INT32_TYPE__ facing_up ;
-    __INT32_TYPE__ facing_right;
-    __INT32_TYPE__ facing_left;
-    double_t angle_view;
+    __INT32_TYPE__	facing_down;
+    __INT32_TYPE__	facing_up;
+    __INT32_TYPE__	facing_right;
+    __INT32_TYPE__	facing_left;
+    double_t		angle_view;
 } __globl_;
 
 typedef struct s___rays
 {
-    __INT32_TYPE__ index;
-    double_t       distance;
-    __hit_          coord_hit_h;
-	__hit_          coord_hit_v;
-	__hit_          coord_hit;
+    __INT32_TYPE__	index;
+    double_t		distance;
+    __point_		coord_hit_h;
+	__point_		coord_hit_v;
+	__point_		coord_hit;
 	double_t		angle_ray;
 	__globl_		*data;
-}__rays_;
-
-
+} __rays_;
 
 typedef struct s_rgb
 {
@@ -117,6 +106,17 @@ typedef struct s__General
 		t_img		*img;
 }t_General;
 
+typedef struct s_var_hor{
+	__INT32_TYPE__	found_horz_wal_hit;
+	__INT32_TYPE__	found_vert_wal_hit;
+	double_t		inity;
+	double_t		initx;
+	double_t		stepy;
+	double_t		stepx;
+	double_t		step_next_x;
+	double_t		step_next_y;
+} t_var_hor;
+
 # define ESC 53
 # define UP 13
 # define RIGHT 2
@@ -151,7 +151,13 @@ int		can_we_ud(int x, int y, char dir, t_game *game);
 
 
 __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);
+double_t		dis_between_to_points(double_t xa, double_t ya, double_t xb, double_t yb);
 void			ray_facing(__rays_ *ray, __globl_ *data);
-void			castRay(__rays_ *ray,t_game *game,__globl_ *data);
+double_t		normalize_angle(double angle);
+bool			has_wall_at(double_t i, double_t j, t_game *game);
+void			init_h(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);
+void			step_h(double_t *stepX, double_t *stepY ,__rays_ *ray);
+void			init_v(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);
+void			step_v(double_t *stepX, double_t *stepY ,__rays_ *ray);
 void			_daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
 #endif
