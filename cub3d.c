@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 03:55:23 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/09 06:09:45 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,16 @@ int driver(t_game *game) {
 	return (0);
 }
 
+void	v()
+{
+	system("leaks cub3d");
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
 
+	atexit(v);
 	innit_data(&game);
 	if (ac != 2)
 		return (ft_putendl_fd("ERROR", 2), 1);
