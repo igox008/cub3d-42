@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/08 12:35:02 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/09 03:59:25 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
 #include <fcntl.h>
-#include "../minilibx-linux/mlx.h"
+#include "mlx.h"
 #include <stdio.h>
 #include <math.h>
 # define EPS_IN_IFIC (SIGCHLD * (0x00008 + SIG_BLOCK ))
@@ -95,8 +95,10 @@ typedef struct  s_game
 	void	*win;
 	int		h;
 	int		w;
+	char	p_view;
 	t_corr	p_pos;
 	t_img	*img;
+	double_t	angle_view;
 }   t_game;
 
 typedef struct s__General
@@ -123,6 +125,8 @@ typedef struct s_var_hor{
 # define RIGHT 2
 # define LEFT 0
 # define DOWN 1
+# define R 124
+# define L 123
 # define TILE_SIZE 64
 # define SPD 4
 # define PI 3.1415927
@@ -140,7 +144,7 @@ bool	check_assets(t_game *game);
 bool	final_map(t_game *game, char *last, int fd);
 bool	last_first(char *s);
 bool	mdl_line(char *s);
-bool	final_check(char **map);
+bool	final_check(char **map, t_game *game);
 void	set_w_h(t_game *game);
 int		listen_hook(int keyp, t_game *game);
 int		red_x(t_game *game);

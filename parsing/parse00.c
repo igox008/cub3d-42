@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:44:31 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/23 09:02:57 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/09 03:35:42 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ bool	parcing(char *file, t_game *game)
 	if (fd < 0)
 		return (false);
 	tmp = get_assets(fd, game);
-	if (!tmp || !final_map(game, game->last, fd) || !final_check(game->map))
+	if (!tmp || !final_map(game, game->last, fd) || !final_check(game->map, game))
 		return (close(fd), ft_putendl_fd("ERROR", 2), false);
 	return (true);
 }

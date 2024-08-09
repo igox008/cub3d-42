@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/07/01 18:53:30 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/09 01:49:38 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_p_pos(t_corr *p, char **map)
 			{
 				p->y *= TILE_SIZE;
 				p->x *= TILE_SIZE;
+				(1) && (p->y += 32, p->x += 32);
 				return ;
 			}
 		}

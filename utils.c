@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/08 14:18:54 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/09 04:00:49 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ int	listen_hook(int keyp, t_game *game)
 		if (can_we_lr(game->p_pos.x, game->p_pos.y, 'r', game) != -1)
 			game->p_pos.x += SPD;
 	}
+	else if (keyp == R)
+		game->angle_view += 0.05;
+	else if (keyp == L)
+		game->angle_view -= 0.05;
 	return (keyp);
 }
 
@@ -108,7 +112,6 @@ int	render_map(void *ptr)
 				put_pix(x, y, 0x0000, img);
 		}
 	}
-	
 	// put_player(game, img);
 	game->img = img;
 	return	(1);

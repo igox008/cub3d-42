@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/08 12:36:09 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/09 04:03:07 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,36 @@ void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data)
 	ray->coord_hit.x, ray->coord_hit.y, game);
 }
 
+double_t	get_view(char dir)
+{
+	if (dir == 'N')
+		return (-PI / 2);
+	else if (dir == 'E')
+		return (0);
+	else if (dir == 'S' && printf("hna\n"))
+		return (PI / 2);
+	else if (dir == 'W')
+		return (PI);
+	return (PI);
+}
+
 __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)
 {
 	double_t			init_angle;
 	__rays_				*ray;
 	__INT32_TYPE__		i;
 	__INT32_TYPE__		num_rays;
+	static int 			x;
 
-	(1) && (data->angle_view = -PI / 2, i = -1, init_angle = data->angle_view \
+	if (!x)
+	{
+		x++;
+		game->angle_view = get_view(game->p_view);
+	}
+	game->angle_view = normalize_angle(game->angle_view);
+	(1) && (i = -1, init_angle = game->angle_view \
 		- (FOV / 2), num_rays = game->w * TILE_SIZE);
-	ray = malloc (sizeof(__rays_));
+	ray = malloc(sizeof(__rays_));
 	if (!ray)
 		return (0);
 	while (++i < num_rays)

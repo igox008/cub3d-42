@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_util_I.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 09:01:55 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/08 09:07:26 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/09 03:19:03 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ bool	has_wall_at(double_t i, double_t j, t_game *game)
 		return (1);
 	x = floor(i / TILE_SIZE);
 	y = floor(j / TILE_SIZE);
-	return (game->map[y][x] == '1');
+	return (game->map && game->map[y] && game->map[y][x] && game->map[y][x] == '1');
 }

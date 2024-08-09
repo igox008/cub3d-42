@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 08:20:06 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/23 09:20:04 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/09 03:52:20 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	get_old_map(char **map)
 	}
 }
 
-bool	final_check(char **map)
+bool	final_check(char **map, t_game *game)
 {
 	int	x;
 	int	y;
@@ -71,6 +71,8 @@ bool	final_check(char **map)
 				|| map[y + 1][x] == ' ' || map[y][x + 1] == ' '
 				|| map[y][x - 1] == ' '))
 				return (false);
+			if (map[y][x] != '1' && map[y][x] != ' ' && map[y][x] != '0')
+				game->p_view = map[y][x];
 		}
 	}
 	// get_old_map(map); // need to discuss
