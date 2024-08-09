@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 04:00:49 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/09 06:25:17 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	render_map(void *ptr)
 {
 	t_game	*game;
 	t_General *gnl;
-	t_img *img = malloc(sizeof(t_img));
+	t_img *img = g_malloc(sizeof(t_img), MALLOC);
 	int		y;
 	int		x;
 
@@ -112,7 +112,6 @@ int	render_map(void *ptr)
 				put_pix(x, y, 0x0000, img);
 		}
 	}
-	// put_player(game, img);
 	game->img = img;
 	return	(1);
 }

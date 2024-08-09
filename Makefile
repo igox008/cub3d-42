@@ -37,7 +37,7 @@ all : $(NAME)
 
 $(NAME) : $(MAND_OBJ) $(MAND_INCLUDES) make_libft
 	@echo "$(ORANGE)$(BOLD)building $@...$(RESET)"
-	@$(CC) $(FLAGS) $(MAND_OBJ) -o $@ $(LIBFT)
+	@$(CC) $(FLAGS) -fsanitize=address -g $(MAND_OBJ) -o $@ $(LIBFT)
 	@echo "$(GREEN)$@ is ready to use$(RESET)"
 
 %.o : %.c $(MAND_INCLUDES)

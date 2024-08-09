@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 03:59:25 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/09 06:15:30 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct  s_game
 	char	p_view;
 	t_corr	p_pos;
 	t_img	*img;
+	__globl_	*data;
 	double_t	angle_view;
 }   t_game;
 
