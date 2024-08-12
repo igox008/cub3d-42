@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 06:33:23 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/12 07:49:31 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,22 @@ void	innit_data(t_game	*game)
 	game->p_cnt = 0;
 }
 
+void	set_ratio(t_game *game)
+{
+	double_t	high;
+
+	((high = game->h) && game->h < game->w) && (high = game->w);
+	high *= TILE_SIZE;
+	game->ratio = 400.0 / high;
+}
+
 bool	mlx_engine(t_game *game)
 {
 	game->ptr = mlx_init();
 	if (!game->ptr)
 		return (false);
 	set_w_h(game);
-	game->win = mlx_new_window(game->ptr, game->w * TILE_SIZE, game->h * TILE_SIZE, "Cub3D");
+	game->win = mlx_new_window(game->ptr, WIDTH, HEIGHT, "Cub3D");
 	if (!game->win)
 		return (false);
 	return (true);
@@ -42,10 +51,23 @@ bool	mlx_engine(t_game *game)
 
 int driver(t_game *game)
 {
-	render_map(game);
+	t_img	*rays;
+
+	rays = malloc(sizeof(t_img));
+	if (!rays)
+		return (g_malloc(0, FREE), exit(0), 0);
+	rays->img = mlx_new_image(game->ptr, (game->w * TILE_SIZE) * game->ratio, (game->h * TILE_SIZE) * game->ratio);
+	if (!rays->img)
+		return (g_malloc(0, FREE), exit(0), 0);
+	rays->addr = mlx_get_data_addr(rays->img, &rays->bits_per_pixel, &rays->line_length, &rays->endian);
+	game->rays = rays;
+	render_game(game);
+	render_map(game, rays);
 	cast_all_rays(game, game->data);
 	mlx_put_image_to_window(game->ptr, game->win, game->img->img, 0, 0);
+	mlx_put_image_to_window(game->ptr, game->win, rays->img, 0, 0);
 	mlx_destroy_image(game->ptr, game->img->img);
+	mlx_destroy_image(game->ptr, rays->img);
 	return (0);
 }
 

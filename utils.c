@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 06:25:17 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/12 07:42:34 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,27 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (!data) {
+	if (!data)
+	{
 		printf("error: mymlx"); 
 		exit(1);
 	}
-
-	// if (x >= 0 && x <)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
-void	put_pix(int x_idx, int y_idx, int color, t_img *data)
+void	put_pix(int x_idx, int y_idx, int color, t_img *data, double_t ratio)
 {
 	int	y;
 	int	x;
+	int	scaled_tile_size;
 
-	y = y_idx * TILE_SIZE;
-	while (y < (y_idx + 1) * TILE_SIZE)
+	scaled_tile_size = TILE_SIZE * ratio;
+	y = y_idx * scaled_tile_size;
+	while (y < (y_idx + 1) * scaled_tile_size)
 	{
-		x = x_idx * TILE_SIZE;
-		while (x < (x_idx + 1) * TILE_SIZE)
+		x = x_idx * scaled_tile_size;
+		while (x < (x_idx + 1) * scaled_tile_size)
 		{
 			my_mlx_pixel_put(data, x, y, color);
 			x++;
@@ -86,20 +87,11 @@ void	put_pix(int x_idx, int y_idx, int color, t_img *data)
 	}
 }
 
-int	render_map(void *ptr)
+int	render_map(t_game *game, t_img *img)
 {
-	t_game	*game;
-	t_General *gnl;
-	t_img *img = g_malloc(sizeof(t_img), MALLOC);
 	int		y;
 	int		x;
 
-	game = (t_game *)ptr;
-	img->img = mlx_new_image(game->ptr, game->w * TILE_SIZE, game->h * TILE_SIZE);
-	if (!img->img)
-		return (write(1,"yes\n",4),1);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length,
-								&img->endian);
 	y = -1;
 	while (game->map[++y])
 	{
@@ -107,11 +99,37 @@ int	render_map(void *ptr)
 		while (game->map[y][++x])
 		{
 			if (game->map[y][x] == '1')
-				put_pix(x, y, BLUE, img);
-			else if (game->map[y][x] != ' ')
-				put_pix(x, y, 0x0000, img);
+				put_pix(x, y, BLUE, img, game->ratio);
+			else
+				put_pix(x, y, 0x0000, img, game->ratio);
 		}
 	}
-	game->img = img;
-	return	(1);
+	return (1);
+}
+
+int	render_game(t_game *game)
+{
+	t_img	*img; 
+	int		y;
+	int		x;
+
+	((img = malloc(sizeof(t_img))) && img) \
+	&& (img->img = mlx_new_image(game->ptr, WIDTH, HEIGHT));
+	if (!img || !img->img)
+		(g_malloc(0, FREE), exit(1));
+	img->addr = mlx_get_data_addr(img->img, \
+	&img->bits_per_pixel, &img->line_length, &img->endian);
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			if (y <= HEIGHT / 2)
+				my_mlx_pixel_put(img, x, y, game->ceiling.hex);
+			else
+				my_mlx_pixel_put(img, x, y, game->floor.hex);
+		}
+	}
+	return (game->img = img, 1);
 }

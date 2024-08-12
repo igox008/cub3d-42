@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 03:01:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 03:10:24 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/12 07:56:38 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ int	can_we_lr(int x, int y, char dir, t_game *game)
 	(0) || (coef = 1, cnt = 0);
 	if (dir == 'l')
 		coef = -1;
-	y -= TILE_SIZE / 2;
+	// y -= TILE_SIZE / 2;
 	while (y < (game->p_pos.y + (TILE_SIZE / 2)))
 	{
-		tmp = SPD * coef;
+		tmp = (SPD + 30) * coef;
 		if (game->map[y / TILE_SIZE][(x + tmp) / TILE_SIZE] != '1')
 			cnt++;
 		y++;
 	}
-	if (cnt < TILE_SIZE / 2 && dir == 'l')
+	if (cnt < TILE_SIZE / 2)
 		return (-1);
-	else if (cnt < TILE_SIZE / 2 && dir == 'r')
-		return (right_hard_code(game), -1);
+	// else if (cnt < TILE_SIZE / 2 && dir == 'r')
+	// 	return (right_hard_code(game), -1);
 	return (y);
 }
 

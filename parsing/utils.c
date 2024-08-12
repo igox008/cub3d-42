@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 01:49:38 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/12 00:10:17 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	set_w_h(t_game *game)
 		game->w++;
 	while (game->map[game->h])
 		game->h++;
+	set_ratio(game);
 	set_p_pos(&game->p_pos, game->map);
 }

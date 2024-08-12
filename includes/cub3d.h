@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 06:15:30 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/12 07:41:09 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # include <signal.h>
 # include <stdint.h>
 # define FOV 60 * M_PI / 180
+
+#define HEIGHT 1080
+#define WIDTH 1920
+#define SCL 0.2
 
 typedef struct s___point___ 
 {
@@ -61,6 +65,7 @@ typedef struct s_rgb
 	int		r;
 	int		g;
 	int		b;
+	int		hex;
 	bool	set;
 }   t_rgb;
 
@@ -98,8 +103,10 @@ typedef struct  s_game
 	char	p_view;
 	t_corr	p_pos;
 	t_img	*img;
+	t_img	*rays;
 	__globl_	*data;
 	double_t	angle_view;
+	double_t	ratio;
 }   t_game;
 
 typedef struct s__General
@@ -134,7 +141,7 @@ typedef struct s_var_hor{
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
-t_img	img;
+
 bool	parcing(char *file, t_game *game);
 char	*till_char(char *line);
 bool	ft_isspace(char c);
@@ -149,11 +156,14 @@ bool	final_check(char **map, t_game *game);
 void	set_w_h(t_game *game);
 int		listen_hook(int keyp, t_game *game);
 int		red_x(t_game *game);
-int		render_map(void *ptr);
+int		render_map(t_game *ptr, t_img *img);
+int		render_game(t_game *game);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		put_player(t_game *game, t_img *img);
+void	set_ratio(t_game *game);
 int		can_we_lr(int x, int y, char dir, t_game *game);
 int		can_we_ud(int x, int y, char dir, t_game *game);
+int		render_ray(__rays_ *ray, t_game *game, int i);
 
 
 __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);

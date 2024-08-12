@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/09 04:03:07 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/12 07:34:40 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ double_t	vertical_distance(t_game *game, __rays_ *ray, __globl_ *data)
 	return (DBL_MAX);
 }
 
-void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data)
+void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data, t_corr p, int i)
 {
 	double_t	hor_dis;
 	double_t	ver_dis;
@@ -80,8 +80,9 @@ void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data)
 	else
 		(1) && (ray->coord_hit.x = ray->coord_hit_v.x, \
 		ray->coord_hit.y = ray->coord_hit_v.y, ray->distance = ver_dis);
-	_daa_line(game->p_pos.x, game->p_pos.y, \
-	ray->coord_hit.x, ray->coord_hit.y, game);
+	render_ray(ray, game, i);
+	_daa_line(p.x, p.y, \
+	ray->coord_hit.x * game->ratio, ray->coord_hit.y * game->ratio, game);
 }
 
 double_t	get_view(char dir)
@@ -90,7 +91,7 @@ double_t	get_view(char dir)
 		return (-PI / 2);
 	else if (dir == 'E')
 		return (0);
-	else if (dir == 'S' && printf("hna\n"))
+	else if (dir == 'S')
 		return (PI / 2);
 	else if (dir == 'W')
 		return (PI);
@@ -104,12 +105,10 @@ __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)
 	__INT32_TYPE__		i;
 	__INT32_TYPE__		num_rays;
 	static int 			x;
+	t_corr				p;
 
-	if (!x)
-	{
-		x++;
-		game->angle_view = get_view(game->p_view);
-	}
+	(!x && ++x) && (game->angle_view = get_view(game->p_view));
+	(1) && (p.x = game->ratio * game->p_pos.x, p.y = game->ratio * game->p_pos.y);
 	game->angle_view = normalize_angle(game->angle_view);
 	(1) && (i = -1, init_angle = game->angle_view \
 		- (FOV / 2), num_rays = game->w * TILE_SIZE);
@@ -117,8 +116,10 @@ __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)
 	if (!ray)
 		return (0);
 	while (++i < num_rays)
-		(1) &&
-			(ray->angle_ray = normalize_angle(init_angle), \
-			cast_ray(ray, game, data), init_angle += FOV / num_rays);
+	{
+		ray->angle_ray = normalize_angle(init_angle);
+		cast_ray(ray, game, data, p, i);
+		init_angle += FOV / num_rays;
+	}
 	return (free(ray), 1);
 }
