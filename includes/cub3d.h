@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/13 03:34:53 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:14:33 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct s_rgb
 
 typedef struct s_corr
 {
-	int	x;
-	int	y;
+	double_t	x;
+	double_t	y;
 }	t_corr;
 
 typedef struct	s_img
@@ -109,6 +109,8 @@ typedef struct  s_game
 	double_t	ratio;
 	mlx_t		*mlx;
 	mlx_texture_t	*fp; // first person POV
+	mlx_image_t		*plyr_img;
+	double_t		rotation_speed;
 }   t_game;
 
 typedef struct s__General
@@ -170,6 +172,10 @@ void	draw_rect(t_img *img, int x, int y_start, int y_end, int color);
 int		render_ray(__rays_ *ray, t_game *game, int i);
 
 
+void	key_up_down(t_game *game, int key);
+void	key_left_right(t_game *game, int key);
+void	key_rl(t_game *game, int key);
+
 __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);
 double_t		dis_between_to_points(double_t xa, double_t ya, double_t xb, double_t yb);
 void			ray_facing(__rays_ *ray, __globl_ *data);
@@ -180,4 +186,5 @@ void			step_h(double_t *stepX, double_t *stepY ,__rays_ *ray);
 void			init_v(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);
 void			step_v(double_t *stepX, double_t *stepY ,__rays_ *ray);
 void			_daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
+double_t		get_view(char dir);
 #endif

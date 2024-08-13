@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_util_I.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 09:01:55 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/12 06:46:39 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:23:24 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ void	ray_facing(__rays_ *ray, __globl_ *data)
 
 double_t	normalize_angle(double angle)
 {
-	(angle > 0) && (angle -= 2 * M_PI, (angle < 0) && (angle += 2 * M_PI));
-	(angle < 0) && (angle += 2 * M_PI, (angle < 0) && (angle -= 2 * M_PI));
+	(angle > 0) && (angle -= 2 * M_PI, (angle <= 0) && (angle += 2 * M_PI));
+	(angle < 0) && (angle += 2 * M_PI, (angle <= 0) && (angle -= 2 * M_PI));
 	return (angle);
 }
+
 
 bool	has_wall_at(double_t i, double_t j, t_game *game)
 {

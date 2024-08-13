@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/13 03:34:15 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:06:29 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,23 @@ void	red_x(t_game *game)
 
 void	listen_hook(mlx_key_data_t keyp, t_game *game)
 {
-	if (keyp.key == MLX_KEY_ESCAPE)
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 	{
 		printf("You pressed ESC\n");
 		red_x(game);
 	}
-	else if (keyp.key == MLX_KEY_W)
-	{
-		if (can_we_ud(game->p_pos.x, game->p_pos.y, 'u', game) != -1)
-			game->p_pos.y -= SPD;
-	}
-	else if (keyp.key == MLX_KEY_S)
-	{
-		if (can_we_ud(game->p_pos.x, game->p_pos.y, 'd', game) != -1)
-			game->p_pos.y += SPD;
-	}
-	else if (keyp.key == MLX_KEY_A)
-	{
-		if (can_we_lr(game->p_pos.x, game->p_pos.y, 'l', game) != -1)
-			game->p_pos.x -= SPD;
-	}
-	else if (keyp.key == MLX_KEY_D)
-	{
-		if (can_we_lr(game->p_pos.x, game->p_pos.y, 'r', game) != -1)
-			game->p_pos.x += SPD;
-	}
-	else if (keyp.key == MLX_KEY_RIGHT)
-		game->angle_view += 0.05;
-	else if (keyp.key == MLX_KEY_LEFT)
-		game->angle_view -= 0.05;
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+		key_up_down(game, UP);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+		key_up_down(game, DOWN);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		key_left_right(game, LEFT);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		key_left_right(game, RIGHT);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		key_rl(game, R);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+		key_rl(game, L);
 }
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
@@ -108,10 +96,12 @@ int	render_map(t_game *game, t_img *img)
 
 int	render_game(t_game *game)
 {
-	t_img	*img; 
-	int		y;
-	int		x;
+	static int	i;
+	t_img		*img;
 
+	if (i > 0)
+		return (0);
+	i++;
 	((img = malloc(sizeof(t_img))) && img) \
 	&& (img->img = mlx_new_image(game->mlx, WIDTH, HEIGHT));
 	if (!img || !img->img)

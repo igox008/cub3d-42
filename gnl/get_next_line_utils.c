@@ -6,13 +6,13 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 04:54:58 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/23 06:19:43 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:03:17 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen_gnl(const char *str)
 {
 	size_t	i;
 

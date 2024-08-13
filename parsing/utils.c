@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/12 00:10:17 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:16:33 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 void	set_p_pos(t_corr *p, char **map)
 {
-	p->y = -1;
-	while (map[++p->y])
+	int	y;
+	int	x;
+
+	y = -1;
+	while (map[++y])
 	{
-		p->x = -1;
-		while (map[p->y][++p->x])
+		x = -1;
+		while (map[y][++x])
 		{
-			if (map[p->y][p->x] != '1'
-				&& map[p->y][p->x] != ' '
-				&& map[p->y][p->x] != '0')
+			if (map[y][x] != '1'
+				&& map[y][x] != ' '
+				&& map[y][x] != '0')
 			{
 				p->y *= TILE_SIZE;
 				p->x *= TILE_SIZE;
