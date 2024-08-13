@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/12 07:34:40 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/13 02:44:52 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data, t_corr p, int i)
 	double_t	hor_dis;
 	double_t	ver_dis;
 
+	(void)p;
 	ray_facing(ray, data);
 	hor_dis = horizontal_distance(game, ray, data);
 	ver_dis = vertical_distance(game, ray, data);
@@ -81,8 +82,8 @@ void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data, t_corr p, int i)
 		(1) && (ray->coord_hit.x = ray->coord_hit_v.x, \
 		ray->coord_hit.y = ray->coord_hit_v.y, ray->distance = ver_dis);
 	render_ray(ray, game, i);
-	_daa_line(p.x, p.y, \
-	ray->coord_hit.x * game->ratio, ray->coord_hit.y * game->ratio, game);
+	// _daa_line(p.x, p.y, \
+	// ray->coord_hit.x * game->ratio, ray->coord_hit.y * game->ratio, game);
 }
 
 double_t	get_view(char dir)
@@ -115,7 +116,7 @@ __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)
 	ray = malloc(sizeof(__rays_));
 	if (!ray)
 		return (0);
-	while (++i < num_rays)
+	while (++i < num_rays && i < WIDTH)
 	{
 		ray->angle_ray = normalize_angle(init_angle);
 		cast_ray(ray, game, data, p, i);

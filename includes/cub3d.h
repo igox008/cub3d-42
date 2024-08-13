@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/12 07:41:09 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/13 03:34:53 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
 #include <fcntl.h>
-#include "mlx.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 #include <stdio.h>
 #include <math.h>
 # define EPS_IN_IFIC (SIGCHLD * (0x00008 + SIG_BLOCK ))
@@ -77,7 +77,7 @@ typedef struct s_corr
 
 typedef struct	s_img
 {
-	void	*img;
+	mlx_image_t	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -107,6 +107,8 @@ typedef struct  s_game
 	__globl_	*data;
 	double_t	angle_view;
 	double_t	ratio;
+	mlx_t		*mlx;
+	mlx_texture_t	*fp; // first person POV
 }   t_game;
 
 typedef struct s__General
@@ -136,7 +138,7 @@ typedef struct s_var_hor{
 # define R 124
 # define L 123
 # define TILE_SIZE 64
-# define SPD 4
+# define SPD 5
 # define PI 3.1415927
 # define PRPL 0x800080
 # define BLUE 0x0000FF
@@ -154,8 +156,9 @@ bool	last_first(char *s);
 bool	mdl_line(char *s);
 bool	final_check(char **map, t_game *game);
 void	set_w_h(t_game *game);
-int		listen_hook(int keyp, t_game *game);
-int		red_x(t_game *game);
+void	listen_hook(mlx_key_data_t keyp, t_game *game);
+int		get_rgba(int r, int g, int b, int a);
+void	red_x(t_game *game);
 int		render_map(t_game *ptr, t_img *img);
 int		render_game(t_game *game);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -163,6 +166,7 @@ int		put_player(t_game *game, t_img *img);
 void	set_ratio(t_game *game);
 int		can_we_lr(int x, int y, char dir, t_game *game);
 int		can_we_ud(int x, int y, char dir, t_game *game);
+void	draw_rect(t_img *img, int x, int y_start, int y_end, int color);
 int		render_ray(__rays_ *ray, t_game *game, int i);
 
 

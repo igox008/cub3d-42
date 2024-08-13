@@ -6,52 +6,51 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/12 07:42:34 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/13 03:34:15 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-int	red_x(t_game *game)
+void	red_x(t_game *game)
 {
-	mlx_destroy_window(game->ptr, game->win);
+	// mlx_destroy_window(game->ptr, game->win);
+	mlx_terminate(game->mlx);
 	g_malloc(0, FREE);
 	exit(0);
-	return (1);
 }
 
-int	listen_hook(int keyp, t_game *game)
+void	listen_hook(mlx_key_data_t keyp, t_game *game)
 {
-	if (keyp == ESC)
+	if (keyp.key == MLX_KEY_ESCAPE)
 	{
 		printf("You pressed ESC\n");
 		red_x(game);
 	}
-	else if (keyp == UP)
+	else if (keyp.key == MLX_KEY_W)
 	{
 		if (can_we_ud(game->p_pos.x, game->p_pos.y, 'u', game) != -1)
 			game->p_pos.y -= SPD;
 	}
-	else if (keyp == DOWN)
+	else if (keyp.key == MLX_KEY_S)
 	{
 		if (can_we_ud(game->p_pos.x, game->p_pos.y, 'd', game) != -1)
 			game->p_pos.y += SPD;
 	}
-	else if (keyp == LEFT)
+	else if (keyp.key == MLX_KEY_A)
 	{
 		if (can_we_lr(game->p_pos.x, game->p_pos.y, 'l', game) != -1)
 			game->p_pos.x -= SPD;
 	}
-	else if (keyp == RIGHT)
+	else if (keyp.key == MLX_KEY_D)
 	{
 		if (can_we_lr(game->p_pos.x, game->p_pos.y, 'r', game) != -1)
 			game->p_pos.x += SPD;
 	}
-	else if (keyp == R)
+	else if (keyp.key == MLX_KEY_RIGHT)
 		game->angle_view += 0.05;
-	else if (keyp == L)
+	else if (keyp.key == MLX_KEY_LEFT)
 		game->angle_view -= 0.05;
-	return (keyp);
 }
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
@@ -80,7 +79,7 @@ void	put_pix(int x_idx, int y_idx, int color, t_img *data, double_t ratio)
 		x = x_idx * scaled_tile_size;
 		while (x < (x_idx + 1) * scaled_tile_size)
 		{
-			my_mlx_pixel_put(data, x, y, color);
+			mlx_put_pixel(data->img, x, y, color);
 			x++;
 		}
 		y++;
@@ -114,22 +113,8 @@ int	render_game(t_game *game)
 	int		x;
 
 	((img = malloc(sizeof(t_img))) && img) \
-	&& (img->img = mlx_new_image(game->ptr, WIDTH, HEIGHT));
+	&& (img->img = mlx_new_image(game->mlx, WIDTH, HEIGHT));
 	if (!img || !img->img)
 		(g_malloc(0, FREE), exit(1));
-	img->addr = mlx_get_data_addr(img->img, \
-	&img->bits_per_pixel, &img->line_length, &img->endian);
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH)
-		{
-			if (y <= HEIGHT / 2)
-				my_mlx_pixel_put(img, x, y, game->ceiling.hex);
-			else
-				my_mlx_pixel_put(img, x, y, game->floor.hex);
-		}
-	}
 	return (game->img = img, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 03:01:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/12 07:56:38 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/13 03:26:03 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,27 @@
 
 int	put_player(t_game *game, t_img *img)
 {
-	int	x;
-	int	y;
+	// int	x;
+	// int	y;
 
-	y = (game->p_pos.y - 32) + 8;
-	while (y < (game->p_pos.y - 32) + 48)
-	{
-		x = (game->p_pos.x - 32) + 8;
-		while (x < (game->p_pos.x - 32) + 48)
-		{
-			my_mlx_pixel_put(img, x, y, GRAY);
-			x++;
-		}
-		y++;
-	}
+	// y = (game->p_pos.y - 32) + 8;
+	// while (y < (game->p_pos.y - 32) + 48)
+	// {
+	// 	x = (game->p_pos.x - 32) + 8;
+	// 	while (x < (game->p_pos.x - 32) + 48)
+	// 	{
+	// 		my_mlx_pixel_put(img, x, y, GRAY);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+	draw_rect(img, game->p_pos.x * game->ratio, (game->p_pos.y - 32) * game->ratio, game->p_pos.y * game->ratio, GRAY);
 	return (1);
 }
 
-int	right_hard_code(t_game *game)
+int	get_rgba(int r, int g, int b, int a)
 {
-	int	i;
-
-	i = -1;
-	while (++i <= 4)
-	{
-		if (game->map[game->p_pos.y / TILE_SIZE][(game->p_pos.x + 1) / TILE_SIZE] != '1')
-			game->p_pos.x++;
-	}
-	return (1);
+    return (r << 24 | g << 16 | b << 8 | a);
 }
 
 int	can_we_lr(int x, int y, char dir, t_game *game)

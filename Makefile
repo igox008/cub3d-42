@@ -17,11 +17,12 @@ BG_MAGENTA=\033[45m
 BG_CYAN=\033[46m
 BG_WHITE=\033[47m
 
-CC = cc
-# OFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
-FLAGS =  -fsanitize=address -g -lmlx -framework OpenGL -framework AppKit
-RM = rm -rf
+MLX = MLX42/build/libmlx42.a  -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
+CC = cc
+OFLAGS = -Ofast -w
+FLAGS =  -fsanitize=address -g -framework OpenGL -framework AppKit -Ofast $(MLX)
+RM = rm -rf
 
 LIBDIR = libft
 LIBFT = -I$(LIBDIR) -L$(LIBDIR) -lft
