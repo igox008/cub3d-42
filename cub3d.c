@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 00:32:58 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:38:41 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int	main(int ac, char **av)
 	game.data = g_malloc(sizeof(__globl_), MALLOC);
 	if (!game.data)
 		return (1);
+	printf("%lf\n", game.angle_view);
+	exit(1);
 	mlx_loop_hook(game.mlx, driver, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
