@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 00:38:41 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 04:05:13 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void    innit_data(t_game *game)
     game->max_len = -1;
     game->p_cnt = 0;
     game->rotation_speed = 2 * M_PI / 180;
-    game->angle_view = get_view(game->p_view);
 }
 
 void	set_ratio(t_game *game)
@@ -37,7 +36,8 @@ void	set_ratio(t_game *game)
 
 bool	mlx_engine(t_game *game)
 {
-	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
+	// game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	if (!game->mlx)
 		return (false);
 	set_w_h(game);
@@ -47,7 +47,7 @@ bool	mlx_engine(t_game *game)
 	game->rays = g_malloc(sizeof(t_img), MALLOC);
 	if (!game->rays)
 		return (false);
-	game->rays->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->rays->img = mlx_new_image(game->mlx, game->w * TILE_SIZE, game->h * TILE_SIZE);
 	if (!game->rays->img)
 		return (false);
 	game->plyr_img = mlx_texture_to_image(game->mlx, game->fp);
@@ -79,9 +79,9 @@ void driver(t_game *game)
 	cast_all_rays(game, game->data);
 	// put_player(game, game->rays);
 	mlx_image_to_window(game->mlx, game->img->img, 0, 0);
-	mlx_image_to_window(game->mlx, game->rays->img, 0, 0);
-	mlx_image_to_window(game->mlx, game->plyr_img, (WIDTH / 2) - (500 / 2), HEIGHT - 408);
-	// clear_img(game->rays);
+	// mlx_image_to_window(game->mlx, game->rays->img, 0, 0);
+	// clear_img(game->rays->img);
+	// mlx_image_to_window(game->mlx, game->plyr_img, (WIDTH / 2) - (500 / 2), HEIGHT - 408);
 	// mlx_destroy_image(game->ptr, game->img->img);
 	// mlx_destroy_image(game->ptr, rays->img);
 }
@@ -108,8 +108,6 @@ int	main(int ac, char **av)
 	game.data = g_malloc(sizeof(__globl_), MALLOC);
 	if (!game.data)
 		return (1);
-	printf("%lf\n", game.angle_view);
-	exit(1);
 	mlx_loop_hook(game.mlx, driver, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);

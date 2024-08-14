@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/14 00:30:32 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 03:46:55 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,21 @@ void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data, t_corr p, int i)
 		(1) && (ray->coord_hit.x = ray->coord_hit_v.x, \
 		ray->coord_hit.y = ray->coord_hit_v.y, ray->distance = ver_dis);
 	render_ray(ray, game, i);
-	// _daa_line(p.x, p.y, \
-	// ray->coord_hit.x * game->ratio, ray->coord_hit.y * game->ratio, game);
+	// _daa_line(game->p_pos.x, game->p_pos.y, \
+	// ray->coord_hit.x, ray->coord_hit.y, game);
 }
 
 double_t	get_view(char dir)
 {
 	if (dir == 'N')
-		return (-PI / 2);
+		return (-M_PI / 2);
 	else if (dir == 'E')
 		return (0);
 	else if (dir == 'S')
-		return (PI / 2);
+		return (M_PI / 2);
 	else if (dir == 'W')
-		return (PI);
-	return (PI);
+		return (M_PI);
+	return (M_PI);
 }
 
 __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)

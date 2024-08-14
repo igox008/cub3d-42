@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 08:20:06 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/09 03:52:20 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 04:04:00 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ bool	final_check(char **map, t_game *game)
 				game->p_view = map[y][x];
 		}
 	}
-	// get_old_map(map); // need to discuss
 	return (true);
 }

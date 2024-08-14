@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:06:54 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 00:31:50 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 03:59:28 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	render_ray(__rays_ *ray, t_game *game, int i)
 	double_t	ray_d;
 	double_t	top;
 	double_t	bott;
-	
+
 	ray_d = ray->distance * cos(normalize_angle(ray->angle_ray) - game->angle_view);
 	proj_dist = (WIDTH / 2) / tan(FOV / 2);
 	wall_h = (TILE_SIZE / ray_d) * proj_dist;

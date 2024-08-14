@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 00:06:29 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 03:46:01 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	put_pix(int x_idx, int y_idx, int color, t_img *data, double_t ratio)
 	int	x;
 	int	scaled_tile_size;
 
-	scaled_tile_size = TILE_SIZE * ratio;
+	scaled_tile_size = TILE_SIZE * 1;
 	y = y_idx * scaled_tile_size;
 	while (y < (y_idx + 1) * scaled_tile_size)
 	{
@@ -72,6 +72,20 @@ void	put_pix(int x_idx, int y_idx, int color, t_img *data, double_t ratio)
 		}
 		y++;
 	}
+	// int	y;
+	// int	x;
+
+	// y = y_idx * TILE_SIZE;
+	// while (y < (y_idx + 1) * TILE_SIZE)
+	// {
+	// 	x = x_idx * TILE_SIZE;
+	// 	while (x < (x_idx + 1) * TILE_SIZE)
+	// 	{
+	// 		mlx_put_pixel(data->img, x, y, color);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
 }
 
 int	render_map(t_game *game, t_img *img)
@@ -86,9 +100,9 @@ int	render_map(t_game *game, t_img *img)
 		while (game->map[y][++x])
 		{
 			if (game->map[y][x] == '1')
-				put_pix(x, y, BLUE, img, game->ratio);
+				put_pix(x, y, get_rgba(0, 0, 255, 255), img, 1);
 			else
-				put_pix(x, y, 0x0000, img, game->ratio);
+				put_pix(x, y, get_rgba(0, 0, 0, 255), img, 1); 
 		}
 	}
 	return (1);

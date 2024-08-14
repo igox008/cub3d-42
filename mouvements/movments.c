@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:09:40 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/14 00:07:08 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 04:01:29 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	key_rl(t_game *game, int key)
 	if (key == L)
 	{
 		// printf("{%f} == ",game->angle_view * 180 / M_PI);
-		game->angle_view = fmod(game->angle_view, (2 * M_PI));
 		// if (game->angle_view < -M_PI)
 		// {
 		// 	// printf("\nyes{%f}",game->angle_view * 180 / M_PI);
@@ -73,13 +72,14 @@ void	key_rl(t_game *game, int key)
 		// }
 		// printf("{%f}\n",game->angle_view * 180 / M_PI);
 		game->angle_view -= game->rotation_speed;
+		game->angle_view = fmod(game->angle_view, (2 * M_PI));
 	}
 	else
 	{
 		// printf("{%f} == ", game->angle_view * 180 / M_PI);
-		game->angle_view = fmod(game->angle_view, (2 * M_PI));
 		// printf("{%f}\n", game->angle_view * 180 / M_PI);
 		game->angle_view += game->rotation_speed;
+		game->angle_view = fmod(game->angle_view, (2 * M_PI));
 	}
 }
 

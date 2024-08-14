@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 00:14:33 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/14 03:54:42 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,23 @@ typedef struct  s_game
 	char    *ea;
 	t_rgb   floor;
 	t_rgb   ceiling;
+	t_img	*rays;
+	__globl_	*data;
+	double_t	ratio;
+	mlx_t		*mlx;
+	mlx_texture_t	*fp; // first person POV
+	mlx_image_t		*plyr_img;
 	int		max_len;
 	int		p_cnt;
 	char	*last;
 	void	*ptr;
 	void	*win;
-	int		h;
 	int		w;
+	int		h;
 	char	p_view;
 	t_corr	p_pos;
 	t_img	*img;
-	t_img	*rays;
-	__globl_	*data;
 	double_t	angle_view;
-	double_t	ratio;
-	mlx_t		*mlx;
-	mlx_texture_t	*fp; // first person POV
-	mlx_image_t		*plyr_img;
 	double_t		rotation_speed;
 }   t_game;
 
@@ -140,8 +140,7 @@ typedef struct s_var_hor{
 # define R 124
 # define L 123
 # define TILE_SIZE 64
-# define SPD 5
-# define PI 3.1415927
+# define SPD 2
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080

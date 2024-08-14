@@ -21,7 +21,7 @@ MLX = MLX42/build/libmlx42.a  -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
 CC = cc
 OFLAGS = -Ofast -w
-FLAGS =  -fsanitize=address -g -framework OpenGL -framework AppKit -Ofast $(MLX)
+FLAGS =  -framework OpenGL -framework AppKit -Ofast $(MLX) -Ofast
 RM = rm -rf
 
 LIBDIR = libft
