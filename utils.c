@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 22:39:05 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 22:49:03 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ int	render_map(t_game *g, t_img *m, t_var v)
 	v.y = (int)ceil(g->p_pos.y) - 160;
 	(v.y < 0) && (v.y = 0);
 	(1) && (v.x_i = 0, v.y_i = -1);
-	while (++v.y_i < 320)
+	while (++v.y_i < 320 && g->map[v.y / TILE_SIZE])
 	{
 		v.x = (int)ceil(g->p_pos.x) - 160;
 		(v.x < 0) && (v.x = 0);
 		v.x_i = -1;
-		while (++v.x_i < 320)
+		while (++v.x_i < 320 && g->map[v.y / TILE_SIZE][v.x / TILE_SIZE])
 		{
 			if (g->map[v.y / TILE_SIZE][v.x / TILE_SIZE] == '1')
 				mlx_put_pixel(m->img, v.x_i, v.y_i, get_rgba(0, 0, 255, 255));
