@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 03:01:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 01:04:19 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 22:30:02 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,33 @@
 
 int	put_player(t_game *game, t_img *img)
 {
-	// int	x;
-	// int	y;
+	int	x;
+	int	y;
+	int	x_i;
+	int	y_i;
+	int	tmp_x;
 
-	// y = (game->p_pos.y - 32) + 8;
-	// while (y < (game->p_pos.y - 32) + 48)
-	// {
-	// 	x = (game->p_pos.x - 32) + 8;
-	// 	while (x < (game->p_pos.x - 32) + 48)
-	// 	{
-	// 		my_mlx_pixel_put(img, x, y, GRAY);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-	draw_rect(img, game->p_pos.x * game->ratio, (game->p_pos.y - 32) * game->ratio, game->p_pos.y * game->ratio, GRAY);
+	(1) && (y = ((int)ceil(game->p_pos.y)) % 320, x = ((int)ceil(game->p_pos.x)) % 320);
+	(1) && (tmp_x = x - 7, y_i = y - 7, x += 7, y += 7);
+	(y_i < 0) && (y += y_i * -1, y_i = 0);
+	(tmp_x < 0) && (x += tmp_x * -1, tmp_x = 0);
+	(x > 319) && (x = 319);
+	(y > 319) && (y = 319);
+	while (y_i <= y && y_i < 320)
+	{
+		x_i = tmp_x;
+		while (x_i <= x && x_i < 320)
+		{
+			// printf("x : %d, y : %d\n", x_i, y_i);
+			mlx_put_pixel(img->img, x_i, y_i, get_rgba(0, 255, 0, 255));
+			x_i++;
+		}
+		y_i++;
+	}
 	return (1);
 }
+
+
 
 int	get_rgba(int r, int g, int b, int a)
 {

@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 03:42:44 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 03:43:11 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	set_p_pos(t_corr *p, char **map)
 		}
 	}
 }
+
+
 
 void	set_w_h(t_game *game)
 {
