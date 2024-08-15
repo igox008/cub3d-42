@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 04:05:13 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 02:42:02 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    innit_data(t_game *game)
     game->ceiling.set = false;
     game->max_len = -1;
     game->p_cnt = 0;
-    game->rotation_speed = 2 * M_PI / 180;
+    game->rotation_speed = 3 * M_PI / 180;
 }
 
 void	set_ratio(t_game *game)
@@ -47,8 +47,15 @@ bool	mlx_engine(t_game *game)
 	game->rays = g_malloc(sizeof(t_img), MALLOC);
 	if (!game->rays)
 		return (false);
+	game->img = g_malloc(sizeof(t_img), MALLOC);
+	if (!game->img)
+		return (false);
+	game->ray = g_malloc(sizeof(__rays_), MALLOC);
+	if (!game->ray)
+		return (false);
+	game->img->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->rays->img = mlx_new_image(game->mlx, game->w * TILE_SIZE, game->h * TILE_SIZE);
-	if (!game->rays->img)
+	if (!game->rays->img || !game->img->img)
 		return (false);
 	game->plyr_img = mlx_texture_to_image(game->mlx, game->fp);
 	if (!game->plyr_img)
@@ -70,20 +77,23 @@ void	clear_img(mlx_image_t *img)
 	}
 }
 
-void driver(t_game *game)
+void driver(void *ptr)
 {
-	mlx_key_data_t tmp;
-	listen_hook(tmp, game);
-	render_game(game);
+	t_game	*game;
+
+	game = (t_game *)ptr;
+	listen_hook(ptr);
+	// listen_hook(tmp, game);
+	// render_game(game);
 	// render_map(game, game->rays);
 	cast_all_rays(game, game->data);
 	// put_player(game, game->rays);
 	mlx_image_to_window(game->mlx, game->img->img, 0, 0);
 	// mlx_image_to_window(game->mlx, game->rays->img, 0, 0);
-	// clear_img(game->rays->img);
 	// mlx_image_to_window(game->mlx, game->plyr_img, (WIDTH / 2) - (500 / 2), HEIGHT - 408);
 	// mlx_destroy_image(game->ptr, game->img->img);
 	// mlx_destroy_image(game->ptr, rays->img);
+	// g_malloc(0, GET_SIZE);
 }
 
 void	v()
@@ -103,12 +113,12 @@ int	main(int ac, char **av)
 		return (g_malloc(0, FREE), 1);
 	if (!mlx_engine(&game))
 		return (g_malloc(0, FREE), 1);
-	// mlx_key_hook(game.mlx, listen_hook, &game);
-	mlx_close_hook(game.mlx, red_x, &game);
 	game.data = g_malloc(sizeof(__globl_), MALLOC);
 	if (!game.data)
 		return (1);
-	mlx_loop_hook(game.mlx, driver, &game);
+	mlx_close_hook(game.mlx, red_x, (void *)&game);
+	mlx_loop_hook(game.mlx, driver, (void *)&game);
+	// mlx_key_hook(game.mlx, listen_hook, (void *)&game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (g_malloc(0, FREE), 0);

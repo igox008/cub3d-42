@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 05:53:49 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/13 23:01:45 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 02:25:04 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ char	**get_map(t_game *game, char *last, int fd)
 	char	*tmp;
 	char	*all;
 
-	all = ft_strjoin(last, "\n", MALLOC);
+	all = ft_strjoin(last, "\n", MALLOC_S);
 	if (!all)
 		return (NULL);
 	tmp = get_next_line(fd);
 	while (tmp)
 	{
-		all = ft_strjoin(all, tmp, MALLOC);
+		all = ft_strjoin(all, tmp, MALLOC_S);
 		if (*tmp == '\n' || !all || !not_valid_char(tmp, game))
 			return (NULL);
 		if (game->max_len < (int)ft_strlen(tmp))
@@ -72,7 +72,7 @@ char	**get_map(t_game *game, char *last, int fd)
 	}
 	if (all && all[ft_strlen(all) - 1] == '\n')
 		return (NULL);
-	return (ft_split(all, "\n"));
+	return (ft_split(all, "\n", MALLOC));
 }
 
 bool	final_map(t_game *game, char *last, int fd)

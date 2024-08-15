@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 03:54:42 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 02:41:35 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
 #include <fcntl.h>
-#include "../MLX42/include/MLX42/MLX42.h"
+#include "../MLX42/include/MLX42.h"
 #include <stdio.h>
 #include <math.h>
 # define EPS_IN_IFIC (SIGCHLD * (0x00008 + SIG_BLOCK ))
@@ -111,6 +111,7 @@ typedef struct  s_game
 	t_img	*img;
 	double_t	angle_view;
 	double_t		rotation_speed;
+	__rays_		*ray;
 }   t_game;
 
 typedef struct s__General
@@ -140,7 +141,7 @@ typedef struct s_var_hor{
 # define R 124
 # define L 123
 # define TILE_SIZE 64
-# define SPD 2
+# define SPD 5
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
@@ -157,9 +158,9 @@ bool	last_first(char *s);
 bool	mdl_line(char *s);
 bool	final_check(char **map, t_game *game);
 void	set_w_h(t_game *game);
-void	listen_hook(mlx_key_data_t keyp, t_game *game);
+void	listen_hook(void *ptr);
 int		get_rgba(int r, int g, int b, int a);
-void	red_x(t_game *game);
+void	red_x(void *ptr);
 int		render_map(t_game *ptr, t_img *img);
 int		render_game(t_game *game);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -171,9 +172,9 @@ void	draw_rect(t_img *img, int x, int y_start, int y_end, int color);
 int		render_ray(__rays_ *ray, t_game *game, int i);
 
 
-void	key_up_down(t_game *game, int key);
-void	key_left_right(t_game *game, int key);
-void	key_rl(t_game *game, int key);
+void	key_up_down(t_game *game);
+void	key_left_right(t_game *game);
+void	key_rl(t_game *game);
 
 __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);
 double_t		dis_between_to_points(double_t xa, double_t ya, double_t xb, double_t yb);
@@ -186,4 +187,5 @@ void			init_v(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);
 void			step_v(double_t *stepX, double_t *stepY ,__rays_ *ray);
 void			_daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
 double_t		get_view(char dir);
+void	clear_img(mlx_image_t *img);
 #endif

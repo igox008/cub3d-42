@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 04:35:35 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/10 02:28:50 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 02:26:24 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strjoin_gnl(char *line, char *buff, int check)
 	if (!line || !buff)
 		return (ft_free(NULL, NULL, &buff, 2));
 	t = ft_strlen(line) + ft_strlen(buff);
-	new = (char *)g_malloc(t + 1, MALLOC);
+	new = (char *)g_malloc(t + 1, MALLOC_S);
 	if (new == NULL)
 		return (NULL);
 	while (line[j])
@@ -63,7 +63,7 @@ char	*get_the_line(int fd, char *next, char *line)
 
 	while (1)
 	{
-		buff = (char *)g_malloc((size_t)BUFFER_SIZE + 1, MALLOC);
+		buff = (char *)g_malloc((size_t)BUFFER_SIZE + 1, MALLOC_S);
 		if (!buff)
 			return (ft_free(&line, NULL, NULL, 0));
 		get_rd = read(fd, buff, BUFFER_SIZE);
@@ -95,7 +95,7 @@ char	*get_next_line(int fd)
 		return (ft_free(NULL, &next_line, NULL, 1));
 	if (!next_line)
 	{
-		next_line = (char *)g_malloc((size_t)BUFFER_SIZE + 1, MALLOC);
+		next_line = (char *)g_malloc((size_t)BUFFER_SIZE + 1, MALLOC_S);
 		if (!next_line)
 			return (NULL);
 		next_line[0] = '\0';

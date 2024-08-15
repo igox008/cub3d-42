@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 04:54:58 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/13 23:03:17 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 02:26:06 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*fill(char *buff)
 		i++;
 	if (buff[i] == '\n')
 		i++;
-	dst = (char *)g_malloc(i + 1, MALLOC);
+	dst = (char *)g_malloc(i + 1, MALLOC_S);
 	if (!dst)
 		return (NULL);
 	i = -1;

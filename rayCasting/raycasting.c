@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/14 03:46:55 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 01:40:13 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,19 @@ __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)
 	__rays_				*ray;
 	__INT32_TYPE__		i;
 	__INT32_TYPE__		num_rays;
-	static int 			x;
 	t_corr				p;
 
 	(1) && (p.x = game->ratio * game->p_pos.x, p.y = game->ratio * game->p_pos.y);
 	(1) && (i = -1, init_angle = game->angle_view \
-		- (FOV / 2), num_rays = game->w * TILE_SIZE);
-	ray = malloc(sizeof(__rays_));
-	if (!ray)
-		return (0);
+		- (FOV / 2), num_rays = WIDTH);
+	// clear_img(game->img->img);
+	// ft_memset(game->ray, 0, sizeof(__rays_));
+	ray = game->ray;
 	while (++i < num_rays && i < WIDTH)
 	{
 		ray->angle_ray = normalize_angle(init_angle);
 		cast_ray(ray, game, data, p, i);
 		init_angle += FOV / num_rays;
 	}
-	return (free(ray), 1);
+	return (1);
 }

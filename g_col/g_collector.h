@@ -11,14 +11,13 @@ typedef struct s_col
 typedef enum e_call
 {
 	FREE,
-	MALLOC
+	FREE_S,
+	MALLOC,
+	MALLOC_S,
+	GET_SIZE
 }t_call;
 
 
-t_col	*new_node(void	*ptr);
-t_col	*last_node(t_col **head);
-void	add_back(t_col	**head, t_col *new);
-void	clear_all(t_col **head);
 void	*g_malloc(size_t size, t_call call);
 
 #endif

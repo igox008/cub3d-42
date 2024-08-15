@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:44:31 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/13 03:27:16 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 02:22:32 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	hndl_rgb(t_game *game, char *line)
 		tmp = till_char(tmp + 1);
 		if (!tmp)
 			return (false);
-		arr = ft_split(tmp, ", ");
+		arr = ft_split(tmp, ", ", MALLOC_S);
 		if (!parse_rgb(arr, tmp, &game->floor))
 			return (false);
 	}
@@ -60,7 +60,7 @@ bool	hndl_rgb(t_game *game, char *line)
 		tmp = till_char(tmp + 1);
 		if (!tmp)
 			return (false);
-		arr = ft_split(tmp, ", ");
+		arr = ft_split(tmp, ", ", MALLOC_S);
 		if (!parse_rgb(arr, tmp, &game->ceiling))
 			return (false);
 	}
@@ -74,7 +74,7 @@ char	*get_assets(int fd, t_game *game)
 	tmp = skip_empty(fd);
 	while (tmp)
 	{
-		(game->last = ft_strdup(tmp, MALLOC), tmp = till_char(tmp));
+		(game->last = ft_strdup(tmp, MALLOC_S), tmp = till_char(tmp));
 		if (!tmp)
 			return (NULL);
 		if (!game->ea && !ft_strncmp(tmp, "EA ", 3))
@@ -107,11 +107,10 @@ bool	parcing(char *file, t_game *game)
 	if (fd < 0)
 		return (false);
 	tmp = get_assets(fd, game);
-	if (!tmp || !final_map(game, game->last, fd) || !final_check(game->map, game))
+	if (!tmp|| !final_map(game, game->last, fd) || !final_check(game->map, game))
 		return (close(fd), ft_putendl_fd("ERROR", 2), false);
-	// game->floor.hex = (game->floor.r << 16) | (game->floor.g << 8) | game->floor.b;
 	game->floor.hex = get_rgba(game->floor.r, game->floor.g, game->floor.b, 255);
-	// game->ceiling.hex = (game->ceiling.r << 16) | (game->ceiling.g << 8) | game->ceiling.b;
 	game->ceiling.hex = get_rgba(game->ceiling.r, game->ceiling.g, game->ceiling.b, 255);
+	// g_malloc(0, FREE_S);
 	return (true);
 }

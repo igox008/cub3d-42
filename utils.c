@@ -6,39 +6,36 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 03:46:01 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 02:41:17 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-void	red_x(t_game *game)
+void	red_x(void *ptr)
 {
+	t_game	*game;
+
+	game = (t_game *)ptr;
 	// mlx_destroy_window(game->ptr, game->win);
 	mlx_terminate(game->mlx);
 	g_malloc(0, FREE);
 	exit(0);
 }
 
-void	listen_hook(mlx_key_data_t keyp, t_game *game)
+void	listen_hook(void *ptr)
 {
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-	{
-		printf("You pressed ESC\n");
-		red_x(game);
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-		key_up_down(game, UP);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-		key_up_down(game, DOWN);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		key_left_right(game, LEFT);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		key_left_right(game, RIGHT);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-		key_rl(game, R);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-		key_rl(game, L);
+	t_game	*game;
+
+	game = (t_game *)ptr;
+    if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+    {
+        printf("You pressed ESC\n");
+        red_x(game);
+    }
+    key_up_down(game);
+    key_left_right(game);
+    key_rl(game);
 }
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
@@ -60,7 +57,7 @@ void	put_pix(int x_idx, int y_idx, int color, t_img *data, double_t ratio)
 	int	x;
 	int	scaled_tile_size;
 
-	scaled_tile_size = TILE_SIZE * 1;
+	scaled_tile_size = TILE_SIZE * ratio;
 	y = y_idx * scaled_tile_size;
 	while (y < (y_idx + 1) * scaled_tile_size)
 	{

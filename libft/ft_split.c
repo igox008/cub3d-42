@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 02:14:14 by alaassir          #+#    #+#             */
-/*   Updated: 2024/06/23 09:22:02 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 02:21:51 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	count_w(char const *s, char *del)
 	return (cnt);
 }
 
-static char	*ft_strndup(const char *s1, int n)
+static char	*ft_strndup(const char *s1, int n, t_call call)
 {
 	int		i;
 	char	*new;
 
 	i = 0;
-	new = (char *)g_malloc(n + 1, MALLOC);
+	new = (char *)g_malloc(n + 1, call);
 	if (!new)
 		return (NULL);
 	while (i < n)
@@ -51,7 +51,7 @@ static char	*ft_strndup(const char *s1, int n)
 	return (new);
 }
 
-char	**ft_split(char const *s, char *del)
+char	**ft_split(char const *s, char *del, t_call call)
 {
 	int		i;
 	int		index;
@@ -61,7 +61,7 @@ char	**ft_split(char const *s, char *del)
 	if (!s)
 		return (NULL);
 	(wc = count_w(s, del), index = -1);
-	arr = g_malloc((sizeof(char *)) * (wc + 1), MALLOC);
+	arr = g_malloc((sizeof(char *)) * (wc + 1), call);
 	if (!arr)
 		return (NULL);
 	while (++index < wc)
@@ -71,7 +71,7 @@ char	**ft_split(char const *s, char *del)
 			s++;
 		while (*(s + i) && ft_strchr(del, *(s + i)) == NULL)
 			i++;
-		arr[index] = ft_strndup(s, i);
+		arr[index] = ft_strndup(s, i, call);
 		if (arr[index] == NULL)
 			return (NULL);
 		while (*s && ft_strchr(del, *s) == NULL)

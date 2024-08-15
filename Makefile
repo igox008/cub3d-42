@@ -20,8 +20,8 @@ BG_WHITE=\033[47m
 MLX = MLX42/build/libmlx42.a  -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
 CC = cc
-OFLAGS = -Ofast -w
-FLAGS =  -framework OpenGL -framework AppKit -Ofast $(MLX) -Ofast
+OFLAGS = -Ofast -Wall -Wextra -Werror 
+FLAGS =  $(MLX) -Wall -Wextra -Werror
 RM = rm -rf
 
 LIBDIR = libft
