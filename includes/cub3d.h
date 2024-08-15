@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 02:41:35 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 07:08:07 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,18 @@ typedef struct s_corr
 	double_t	y;
 }	t_corr;
 
+typedef struct s_var
+{
+	int		y;
+	int		x;
+	int		y_p;
+	int		x_p;
+	int		y_i;
+	int		x_i;
+	int		y_v;
+	int		x_v;
+}	t_var;
+
 typedef struct	s_img
 {
 	mlx_image_t	*img;
@@ -93,11 +105,12 @@ typedef struct  s_game
 	char    *ea;
 	t_rgb   floor;
 	t_rgb   ceiling;
-	t_img	*rays;
+	t_img	*mini_map;
 	__globl_	*data;
 	double_t	ratio;
 	mlx_t		*mlx;
-	mlx_texture_t	*fp; // first person POV
+	mlx_texture_t	*fp;
+	mlx_texture_t	*wall;
 	mlx_image_t		*plyr_img;
 	int		max_len;
 	int		p_cnt;
@@ -112,6 +125,7 @@ typedef struct  s_game
 	double_t	angle_view;
 	double_t		rotation_speed;
 	__rays_		*ray;
+	t_var		v;
 }   t_game;
 
 typedef struct s__General
@@ -141,10 +155,11 @@ typedef struct s_var_hor{
 # define R 124
 # define L 123
 # define TILE_SIZE 64
-# define SPD 5
+# define SPD 3
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
+# define MINI_MAP_SIZE 400
 
 bool	parcing(char *file, t_game *game);
 char	*till_char(char *line);
@@ -161,7 +176,7 @@ void	set_w_h(t_game *game);
 void	listen_hook(void *ptr);
 int		get_rgba(int r, int g, int b, int a);
 void	red_x(void *ptr);
-int		render_map(t_game *ptr, t_img *img);
+int		render_map(t_game *g, t_img *m, t_var v);
 int		render_game(t_game *game);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		put_player(t_game *game, t_img *img);

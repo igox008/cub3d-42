@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 02:42:02 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/15 22:16:16 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    innit_data(t_game *game)
     game->ceiling.set = false;
     game->max_len = -1;
     game->p_cnt = 0;
-    game->rotation_speed = 3 * M_PI / 180;
+    game->rotation_speed = 2 * M_PI / 180;
 }
 
 void	set_ratio(t_game *game)
@@ -42,10 +42,11 @@ bool	mlx_engine(t_game *game)
 		return (false);
 	set_w_h(game);
 	game->fp = mlx_load_png("textures/player pov.png");
-	if (!game->fp)
+	game->wall = mlx_load_png("textures/wall.png");
+	if (!game->fp || !game->wall)
 		return (false);
-	game->rays = g_malloc(sizeof(t_img), MALLOC);
-	if (!game->rays)
+	game->mini_map = g_malloc(sizeof(t_img), MALLOC);
+	if (!game->mini_map)
 		return (false);
 	game->img = g_malloc(sizeof(t_img), MALLOC);
 	if (!game->img)
@@ -54,12 +55,15 @@ bool	mlx_engine(t_game *game)
 	if (!game->ray)
 		return (false);
 	game->img->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->rays->img = mlx_new_image(game->mlx, game->w * TILE_SIZE, game->h * TILE_SIZE);
-	if (!game->rays->img || !game->img->img)
+	game->mini_map->img = mlx_new_image(game->mlx, 320, 320);
+	if (!game->mini_map->img || !game->img->img)
 		return (false);
 	game->plyr_img = mlx_texture_to_image(game->mlx, game->fp);
 	if (!game->plyr_img)
 		return (false);
+	mlx_image_to_window(game->mlx, game->img->img, 0, 0);
+	mlx_image_to_window(game->mlx, game->mini_map->img, 0, 0);
+	mlx_image_to_window(game->mlx, game->plyr_img, (WIDTH / 2) - (500 / 2), HEIGHT - 408);
 	return (true);
 }
 
@@ -83,14 +87,11 @@ void driver(void *ptr)
 
 	game = (t_game *)ptr;
 	listen_hook(ptr);
-	// listen_hook(tmp, game);
-	// render_game(game);
-	// render_map(game, game->rays);
+	render_map(game, game->mini_map, game->v);
 	cast_all_rays(game, game->data);
-	// put_player(game, game->rays);
-	mlx_image_to_window(game->mlx, game->img->img, 0, 0);
-	// mlx_image_to_window(game->mlx, game->rays->img, 0, 0);
-	// mlx_image_to_window(game->mlx, game->plyr_img, (WIDTH / 2) - (500 / 2), HEIGHT - 408);
+	// put_player(game, game->mini_map);
+	// mlx_image_to_window(game->mlx, game->mini_map->img, 0, 0);
+	
 	// mlx_destroy_image(game->ptr, game->img->img);
 	// mlx_destroy_image(game->ptr, rays->img);
 	// g_malloc(0, GET_SIZE);
@@ -116,6 +117,7 @@ int	main(int ac, char **av)
 	game.data = g_malloc(sizeof(__globl_), MALLOC);
 	if (!game.data)
 		return (1);
+	game.ratio = 0.5;
 	mlx_close_hook(game.mlx, red_x, (void *)&game);
 	mlx_loop_hook(game.mlx, driver, (void *)&game);
 	// mlx_key_hook(game.mlx, listen_hook, (void *)&game);
