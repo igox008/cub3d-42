@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 12:21:17 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/16 21:51:42 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,6 @@ bool	last_first(char *s);
 bool	mdl_line(char *s);
 bool	final_check(char **map, t_game *game);
 void	set_w_h(t_game *game);
-void	listen_hook(void *ptr);
 uint32_t	get_rgba(int r, int g, int b, int a);
 void	red_x(void *ptr);
 int		render_map(t_game *g, t_img *m, t_var v);
@@ -192,10 +191,10 @@ void			draw_rect(t_img *img, int x, int y_start, int y_end, int color);
 int				render_ray(__rays_ *ray, t_game *game, int i);
 
 
+void			listen_hook(void *ptr);
 void			key_up_down(t_game *game);
 void			key_left_right(t_game *game);
 void			key_rl(t_game *game);
-
 __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);
 double_t		dis_between_to_points(double_t xa, double_t ya, double_t xb, double_t yb);
 void			ray_facing(__rays_ *ray, __globl_ *data);
