@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 12:21:17 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:10:51 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,17 @@ typedef struct s_corr
 
 typedef struct s_var
 {
-	int		y;
-	int		x;
-	int		y_p;
-	int		x_p;
-	int		y_i;
-	int		x_i;
-	int		y_v;
-	int		x_v;
-	int		offst_x;
-	int		offst_y;
+	int				y;
+	int				x;
+	int				y_p;
+	int				x_p;
+	int				y_i;
+	int				x_i;
+	int				y_v;
+	int				x_v;
+	int				offst_x;
+	int				offst_y;
+	mouse_mode_t	mode;
 }	t_var;
 
 typedef struct	s_img
@@ -168,6 +169,8 @@ typedef struct s_var_hor{
 # define GRAY 0x808080
 # define MINI_MAP_SIZE 400
 
+void    innit_data(t_game *game);
+bool	mlx_engine(t_game *game);
 bool	parcing(char *file, t_game *game);
 char	*till_char(char *line);
 bool	ft_isspace(char c);
@@ -188,6 +191,7 @@ int		render_game(t_game *game);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		put_player(t_game *game, t_img *img);
 double_t		get_ratio(t_game *game, double_t new_size);
+void			clear_img(mlx_image_t *img);
 void			draw_rect(t_img *img, int x, int y_start, int y_end, int color);
 int				render_ray(__rays_ *ray, t_game *game, int i);
 
@@ -212,4 +216,9 @@ unsigned int	*get_pxls(char *path, t_img *txtr, t_game *g);
 bool			innit_txtrs(t_game *game);
 int				render_full_map(t_game *g, t_img *m, t_var v);
 int				put_player_full_map(t_game *game, t_img *img, double_t ratio);
+int				play_sound(void);
+void			driver(void *ptr);
+void			hooks(mlx_key_data_t keydata, void* param);
+void			cursor_hook(double xpos, double ypos, void* param);
+
 #endif

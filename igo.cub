@@ -1,7 +1,7 @@
-NO ./textures/NORTH.png
-SO ./textures/SOUTH.png
-WE ./textures/WEST.png
-EA ./textures/EAST.png
+NO ./textures/wall.png
+SO ./textures/wall.png
+WE ./textures/wall.png
+EA ./textures/wall.png
 
 F 112,128,144
 C 135,206,235

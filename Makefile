@@ -28,9 +28,10 @@ LIBDIR = libft
 LIBFT = -I$(LIBDIR) -L$(LIBDIR) -lft
 NAME = cub3d
 MAND_INCLUDES = libft/libft.h includes/cub3d.h g_col/g_collector.h gnl/get_next_line.h
-MAND_SRC = rayCasting/raycasting.c  rayCasting/raycasting_util_I.c rayCasting/raycasting_util_II.c ./dda.c cub3d.c \
+MAND_SRC = rayCasting/raycasting.c  rayCasting/raycasting_util_I.c rayCasting/raycasting_util_II.c cub3d.c \
 			parsing/parse00.c g_col/g_collector.c gnl/get_next_line.c gnl/get_next_line_utils.c parsing/parse_utils01.c \
-			parsing/parse_utils00.c parsing/parse01.c parsing/utils.c utils.c utils1.c rendering/render.c mouvements/movments.c
+			parsing/parse_utils00.c parsing/parse01.c parsing/utils.c rendering/render.c mouvements/movments.c \
+			sfx/run_sfx.c hooks/hooks.c utils/utils.c utils/utils1.c utils/utils2.c
 
 MAND_OBJ = $(MAND_SRC:.c=.o)
 

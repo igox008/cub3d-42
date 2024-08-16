@@ -6,11 +6,11 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 12:21:36 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:12:24 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	red_x(void *ptr)
 {
@@ -20,18 +20,6 @@ void	red_x(void *ptr)
 	mlx_terminate(game->mlx);
 	g_malloc(0, FREE);
 	exit(0);
-}
-
-void	listen_hook(void *ptr)
-{
-	t_game	*game;
-
-	game = (t_game *)ptr;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-		return (printf("You pressed ESC\n"), red_x(game));
-	key_up_down(game);
-	key_left_right(game);
-	key_rl(game);
 }
 
 void	put_pix(int x_idx, int y_idx, int color, t_img *data)
@@ -96,4 +84,15 @@ int	render_map(t_game *g, t_img *m, t_var v)
 	}
 	put_player(g, m);
 	return (1);
+}
+
+double_t	get_ratio(t_game *game, double_t new_size)
+{
+	double_t	high;
+	double_t	ratio;
+
+	((high = game->h) && game->h < game->w) && (high = game->w);
+	high *= TILE_SIZE;
+	ratio = new_size / high;
+	return (ratio);
 }
