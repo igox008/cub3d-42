@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:09:40 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/16 06:46:49 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/16 06:57:26 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,17 @@ bool	check_wall(int x, int y, t_game *game)
 	int	tmp_x_1 ;
 	int	tmp_y_1 ;
 
-	tmp_x = (x + 30) / TILE_SIZE;
-	tmp_y = (y + 30) / TILE_SIZE;
-	tmp_x_1 = (x - 30) / TILE_SIZE;
-	tmp_y_1 = (y - 30) / TILE_SIZE;
-	x /= TILE_SIZE;
-	y /= TILE_SIZE;
+	(1) && (tmp_x = (x + 30) / TILE_SIZE, tmp_y = (y + 30) / TILE_SIZE, \
+	tmp_x_1 = (x - 30) / TILE_SIZE, tmp_y_1 = (y - 30) / TILE_SIZE, x /= \
+	TILE_SIZE, y /= TILE_SIZE);
 	if ((x >= game->w || y >= game->h || x < 0 || y < 0)
 		|| (tmp_x >= game->w || tmp_y >= game->h 
-			|| tmp_x < 0 || tmp_y < 0 || tmp_x_1 < 0 || tmp_y_1 < 0 || tmp_x_1 >= game->w || tmp_y_1 >= game->h))
-		return (1);
-	if (game->map[y][x] == '1' 
-		|| game->map[tmp_y][tmp_x] == '1'
-		|| game->map[tmp_y][x] == '1'
-		|| game->map[y][tmp_x] == '1'
-		|| game->map[tmp_y_1][tmp_x] == '1'
-		|| game->map[tmp_y][tmp_x_1] == '1')
+			|| tmp_x < 0 || tmp_y < 0 || tmp_x_1 < 0 || tmp_y_1 < 0 ||\
+			tmp_x_1 >= game->w || tmp_y_1 >= game->h))
+			return (1);
+	if (game->map[y][x] == '1'|| game->map[tmp_y][tmp_x] == '1' \
+		|| game->map[tmp_y][x] == '1' || game->map[y][tmp_x] == '1'\
+		|| game->map[tmp_y_1][tmp_x] == '1' || game->map[tmp_y][tmp_x_1] == '1')
 		return (1);
 	return (0);
 }
