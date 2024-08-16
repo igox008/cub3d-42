@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:06:54 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 06:28:53 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:09:00 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@ void	draw_rect(t_img *img, int x, int y_start, int y_end, int color)
 {
 	while (y_start < y_end && y_start < HEIGHT && y_start >= 0)
 		mlx_put_pixel(img->img, x, y_start++, color);
+}
+
+t_img	get_img(t_game *game, __rays_	*ray)
+{
+	if (ray->is_vert)
+	{
+		if (cos(ray->angle_ray) < 0)
+			return (game->i_ea);
+		return (game->i_so);
+	}
+	else
+	{
+		if (sin(ray->angle_ray) < 0)
+			return (game->i_no);
+		return (game->i_we);
+	}
 }
 
 void	draw_texture(t_game *g, int x, int y_start, int y_end)
@@ -32,11 +48,10 @@ void	draw_texture(t_game *g, int x, int y_start, int y_end)
 	v.y = y_start;
 	while (v.y < y_end && v.y < HEIGHT && v.y >= 0)
 	{
-		// v.offst_y = v.y * (TILE_SIZE / g->wall_h);
-		int tmp = (v.y + (g->wall_h / 2) - (HEIGHT / 2));
-		v.offst_y = tmp * ((double_t)TILE_SIZE / g->wall_h);
+		v.y_v = (v.y + (g->wall_h / 2) - (HEIGHT / 2));
+		v.offst_y = v.y_v * ((double_t)TILE_SIZE / g->wall_h);
 		color_idx = (int)(TILE_SIZE * v.offst_y) + v.offst_x;
-		mlx_put_pixel(g->img->img, x, v.y, g->wall.pxls[color_idx]);
+		mlx_put_pixel(g->img->img, x, v.y, get_img(g, ray).pxls[color_idx]);
 		v.y++;
 	}
 }
@@ -62,7 +77,6 @@ int	render_ray(__rays_ *ray, t_game *game, int i)
 		top = 0;
 	else if (top >= HEIGHT)
 		top = HEIGHT - 1;
-	// draw_rect(game->img, i, top, bott, get_rgba(255, 255, 255, 255));
 	draw_texture(game, i, top, bott);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 06:14:08 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:24:00 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,50 +23,42 @@ void    innit_data(t_game *game)
     game->max_len = -1;
     game->p_cnt = 0;
     game->rotation_speed = 2 * M_PI / 180;
+	game->full_map = false;
 }
 
-void	set_ratio(t_game *game)
+double_t	get_ratio(t_game *game, double_t new_size)
 {
 	double_t	high;
+	double_t	ratio;
 
 	((high = game->h) && game->h < game->w) && (high = game->w);
 	high *= TILE_SIZE;
-	game->ratio = 400.0 / high;
+	ratio = new_size / high;
+	return (ratio);
 }
 
 bool	mlx_engine(t_game *game)
 {
-	// game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
-	if (!game->mlx)
-		return (false);
 	set_w_h(game);
-	game->fp = mlx_load_png("textures/player pov.png");
-	game->wall.txtr = mlx_load_png("textures/wall.png");
-	game->wall.img = mlx_texture_to_image(game->mlx, game->wall.txtr);
-	mlx_resize_image(game->wall.img, TILE_SIZE, TILE_SIZE);
-	game->wall.pxls = get_pxls(game->wall.img);
-	if (!game->fp || !game->wall.txtr)
+	(game->mlx) && (game->fp = mlx_load_png("textures/player pov.png"));
+	if (!game->mlx || !innit_txtrs(game) || !game->fp)
 		return (false);
 	game->mini_map = g_malloc(sizeof(t_img), MALLOC);
-	if (!game->mini_map)
-		return (false);
 	game->img = g_malloc(sizeof(t_img), MALLOC);
-	if (!game->img)
-		return (false);
 	game->ray = g_malloc(sizeof(__rays_), MALLOC);
-	if (!game->ray)
+	if (!game->mini_map || !game->img || !game->ray)
 		return (false);
 	game->img->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->mini_map->img = mlx_new_image(game->mlx, 320, 320);
+	game->mini_map->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (!game->mini_map->img || !game->img->img)
 		return (false);
 	game->plyr_img = mlx_texture_to_image(game->mlx, game->fp);
 	if (!game->plyr_img)
 		return (false);
 	mlx_image_to_window(game->mlx, game->img->img, 0, 0);
-	mlx_image_to_window(game->mlx, game->mini_map->img, 0, 0);
 	mlx_image_to_window(game->mlx, game->plyr_img, (WIDTH / 2) - (500 / 2), HEIGHT - 408);
+	mlx_image_to_window(game->mlx, game->mini_map->img, 0, 0);
 	return (true);
 }
 
@@ -80,7 +72,7 @@ void	clear_img(mlx_image_t *img)
 	{
 		x = -1;
 		while (++x < WIDTH)
-			mlx_put_pixel(img, x, y, get_rgba(255, 255, 255, 255));
+			mlx_put_pixel(img, x, y, get_rgba(255, 255, 255, 0));
 	}
 }
 
@@ -89,8 +81,12 @@ void driver(void *ptr)
 	t_game	*game;
 
 	game = (t_game *)ptr;
-	listen_hook(ptr);
-	render_map(game, game->mini_map, game->v);
+	if (!game->full_map)
+		listen_hook(ptr);
+	if (game->full_map)
+		render_full_map(game, game->mini_map, game->v);
+	else
+		render_map(game, game->mini_map, game->v);
 	cast_all_rays(game, game->data);
 	// put_player(game, game->mini_map);
 	// mlx_image_to_window(game->mlx, game->mini_map->img, 0, 0);
@@ -103,6 +99,22 @@ void driver(void *ptr)
 void	v()
 {
 	system("leaks cub3d");
+}
+
+void	hooks(mlx_key_data_t keydata, void* param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	(void)keydata;
+	// if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) && !game->full_map)
+	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) && !game->full_map)
+		game->full_map = true;
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) && game->full_map)
+	{
+		clear_img(game->mini_map->img);
+		game->full_map = false;
+	}
 }
 
 int	main(int ac, char **av)
@@ -123,7 +135,7 @@ int	main(int ac, char **av)
 	game.ratio = 0.5;
 	mlx_close_hook(game.mlx, red_x, (void *)&game);
 	mlx_loop_hook(game.mlx, driver, (void *)&game);
-	// mlx_key_hook(game.mlx, listen_hook, (void *)&game);
+	mlx_key_hook(game.mlx, hooks, (void *)&game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (g_malloc(0, FREE), 0);

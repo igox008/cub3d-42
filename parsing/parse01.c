@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 08:20:06 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/14 04:04:00 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/16 09:47:01 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,30 @@ bool	final_check(char **map, t_game *game)
 				game->p_view = map[y][x];
 		}
 	}
+	if (!check_textures(game))
+		return (false);
+	return (true);
+}
+
+bool	check_textures(t_game *game)
+{
+	mlx_texture_t	*tmp;
+
+	tmp = mlx_load_png(game->ea);
+	if (!tmp)
+		return (false);
+	mlx_delete_texture(tmp);
+	tmp = mlx_load_png(game->so);
+	if (!tmp)
+		return (false);
+	mlx_delete_texture(tmp);
+	tmp = mlx_load_png(game->we);
+	if (!tmp)
+		return (false);
+	mlx_delete_texture(tmp);
+	tmp = mlx_load_png(game->no);
+	if (!tmp)
+		return (false);
+	mlx_delete_texture(tmp);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:44:31 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 02:22:32 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/16 08:50:28 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ bool	parcing(char *file, t_game *game)
 		return (close(fd), ft_putendl_fd("ERROR", 2), false);
 	game->floor.hex = get_rgba(game->floor.r, game->floor.g, game->floor.b, 255);
 	game->ceiling.hex = get_rgba(game->ceiling.r, game->ceiling.g, game->ceiling.b, 255);
-	// g_malloc(0, FREE_S);
+	g_malloc(0, FREE_S);
 	return (true);
 }

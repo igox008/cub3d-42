@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 06:40:56 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:21:17 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,13 @@ typedef struct  s_game
 {
 	char    **map;
 	char    *so;
+	t_img	i_so;
 	char    *no;
+	t_img	i_no;
 	char    *we;
+	t_img	i_we;
 	char    *ea;
+	t_img	i_ea;
 	t_rgb   floor;
 	t_rgb   ceiling;
 	t_img	*mini_map;
@@ -128,6 +132,7 @@ typedef struct  s_game
 	__rays_		*ray;
 	t_var		v;
 	double_t	wall_h;
+	bool		full_map;
 }   t_game;
 
 typedef struct s__General
@@ -157,7 +162,7 @@ typedef struct s_var_hor{
 # define R 124
 # define L 123
 # define TILE_SIZE 320
-# define SPD 15
+# define SPD 5 * (TILE_SIZE / 64)
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
@@ -182,16 +187,14 @@ int		render_map(t_game *g, t_img *m, t_var v);
 int		render_game(t_game *game);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		put_player(t_game *game, t_img *img);
-void	set_ratio(t_game *game);
-int		can_we_lr(int x, int y, char dir, t_game *game);
-int		can_we_ud(int x, int y, char dir, t_game *game);
-void	draw_rect(t_img *img, int x, int y_start, int y_end, int color);
-int		render_ray(__rays_ *ray, t_game *game, int i);
+double_t		get_ratio(t_game *game, double_t new_size);
+void			draw_rect(t_img *img, int x, int y_start, int y_end, int color);
+int				render_ray(__rays_ *ray, t_game *game, int i);
 
 
-void	key_up_down(t_game *game);
-void	key_left_right(t_game *game);
-void	key_rl(t_game *game);
+void			key_up_down(t_game *game);
+void			key_left_right(t_game *game);
+void			key_rl(t_game *game);
 
 __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);
 double_t		dis_between_to_points(double_t xa, double_t ya, double_t xb, double_t yb);
@@ -204,6 +207,9 @@ void			init_v(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);
 void			step_v(double_t *stepX, double_t *stepY ,__rays_ *ray);
 void			_daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
 double_t		get_view(char dir);
-unsigned int	*get_pxls(mlx_image_t *img);
-void	clear_img(mlx_image_t *img);
+bool			check_textures(t_game *game);
+unsigned int	*get_pxls(char *path, t_img *txtr, t_game *g);
+bool			innit_txtrs(t_game *game);
+int				render_full_map(t_game *g, t_img *m, t_var v);
+int				put_player_full_map(t_game *game, t_img *img, double_t ratio);
 #endif
