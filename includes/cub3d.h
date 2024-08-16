@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 23:04:27 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/16 06:40:56 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s___rays
 	__point_		coord_hit;
 	double_t		angle_ray;
 	__globl_		*data;
+	bool			is_vert;
 } __rays_;
 
 typedef struct s_rgb
@@ -85,15 +86,15 @@ typedef struct s_var
 	int		x_i;
 	int		y_v;
 	int		x_v;
+	int		offst_x;
+	int		offst_y;
 }	t_var;
 
 typedef struct	s_img
 {
-	mlx_image_t	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	mlx_image_t		*img;
+	mlx_texture_t	*txtr;
+	unsigned int	*pxls;
 }	t_img;
 
 typedef struct  s_game
@@ -110,7 +111,7 @@ typedef struct  s_game
 	double_t	ratio;
 	mlx_t		*mlx;
 	mlx_texture_t	*fp;
-	mlx_texture_t	*wall;
+	t_img			wall;
 	mlx_image_t		*plyr_img;
 	int		max_len;
 	int		p_cnt;
@@ -126,6 +127,7 @@ typedef struct  s_game
 	double_t		rotation_speed;
 	__rays_		*ray;
 	t_var		v;
+	double_t	wall_h;
 }   t_game;
 
 typedef struct s__General
@@ -154,8 +156,8 @@ typedef struct s_var_hor{
 # define DOWN 1
 # define R 124
 # define L 123
-# define TILE_SIZE 64
-# define SPD 2
+# define TILE_SIZE 320
+# define SPD 15
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
@@ -174,7 +176,7 @@ bool	mdl_line(char *s);
 bool	final_check(char **map, t_game *game);
 void	set_w_h(t_game *game);
 void	listen_hook(void *ptr);
-int		get_rgba(int r, int g, int b, int a);
+uint32_t	get_rgba(int r, int g, int b, int a);
 void	red_x(void *ptr);
 int		render_map(t_game *g, t_img *m, t_var v);
 int		render_game(t_game *game);
@@ -202,5 +204,6 @@ void			init_v(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);
 void			step_v(double_t *stepX, double_t *stepY ,__rays_ *ray);
 void			_daa_line(int X0, int Y0, int X1, int Y1,t_game *game) ;
 double_t		get_view(char dir);
+unsigned int	*get_pxls(mlx_image_t *img);
 void	clear_img(mlx_image_t *img);
 #endif
