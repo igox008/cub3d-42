@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 22:43:44 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/15 23:04:27 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ typedef struct s_var_hor{
 # define R 124
 # define L 123
 # define TILE_SIZE 64
-# define SPD 3
+# define SPD 2
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
