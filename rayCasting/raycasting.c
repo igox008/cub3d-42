@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/15 02:49:35 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/16 02:09:45 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,14 @@ void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data, t_corr p, int i)
 	ray_facing(ray, data);
 	hor_dis = horizontal_distance(game, ray, data);
 	ver_dis = vertical_distance(game, ray, data);
+	ray->is_vert = true;
 	if (hor_dis < ver_dis)
 		(1) && (ray->coord_hit.x = ray->coord_hit_h.x, ray->coord_hit.y = \
-		ray->coord_hit_h.y, ray->distance = hor_dis);
+		ray->coord_hit_h.y, ray->distance = hor_dis, ray->is_vert = false);
 	else
 		(1) && (ray->coord_hit.x = ray->coord_hit_v.x, \
 		ray->coord_hit.y = ray->coord_hit_v.y, ray->distance = ver_dis);
 	render_ray(ray, game, i);
-	// _daa_line(game->p_pos.x, game->p_pos.y, \
-	// ray->coord_hit.x, ray->coord_hit.y, game);
 }
 
 double_t	get_view(char dir)

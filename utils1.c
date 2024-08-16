@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 03:01:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 23:49:33 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/16 06:15:57 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,25 @@ int	put_player(t_game *game, t_img *img)
 	return (1);
 }
 
-int	get_rgba(int r, int g, int b, int a)
+uint32_t	get_rgba(int r, int g, int b, int a)
 {
     return (r << 24 | g << 16 | b << 8 | a);
+}
+
+unsigned int	*get_pxls(mlx_image_t *img)
+{
+	unsigned int	*pxls;
+	t_var			v;
+
+	pxls = g_malloc((TILE_SIZE * TILE_SIZE) * sizeof(uint32_t), MALLOC);
+	if (!pxls)
+		return (NULL);
+	(1) && (v.x = 0, v.y = 0);
+	while (v.y < TILE_SIZE * TILE_SIZE * 4)
+	{
+		pxls[v.x++] = (uint32_t)get_rgba(img->pixels[v.y], img->pixels[v.y + 1],\
+		img->pixels[v.y + 2], img->pixels[v.y + 3]);
+		v.y += 4;
+	}
+	return (pxls);
 }

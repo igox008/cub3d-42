@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 22:16:16 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/16 06:14:08 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ bool	mlx_engine(t_game *game)
 		return (false);
 	set_w_h(game);
 	game->fp = mlx_load_png("textures/player pov.png");
-	game->wall = mlx_load_png("textures/wall.png");
-	if (!game->fp || !game->wall)
+	game->wall.txtr = mlx_load_png("textures/wall.png");
+	game->wall.img = mlx_texture_to_image(game->mlx, game->wall.txtr);
+	mlx_resize_image(game->wall.img, TILE_SIZE, TILE_SIZE);
+	game->wall.pxls = get_pxls(game->wall.img);
+	if (!game->fp || !game->wall.txtr)
 		return (false);
 	game->mini_map = g_malloc(sizeof(t_img), MALLOC);
 	if (!game->mini_map)
