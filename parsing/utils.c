@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 11:20:16 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:12:24 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,35 @@ void	set_p_pos(t_corr *p, char **map)
 
 void	set_w_h(t_game *game)
 {
-	game->h = 0;
-	game->w = 0;
-	while (game->map[game->h][game->w])
-		game->w++;
-	while (game->map[game->h])
-		game->h++;
+	game->w = game->max_len;
 	set_p_pos(&game->p_pos, game->map);
+}
+
+bool	last_first(char *s)
+{
+	int i;
+
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] != '1' && s[i] != ' ')
+			return (false);
+	}
+	return (true);
+}
+
+bool	mdl_line(char *s)
+{
+	int	i;
+
+	while (s && *s && *s == ' ')
+		s++;
+	if (*s == '\0')
+		return (true);
+	i = ft_strlen(s) - 1;
+	while (s[i] == ' ' && i >= 0)
+		i--;
+	if (s[i] != '1')
+		return (false);
+	return (true);
 }

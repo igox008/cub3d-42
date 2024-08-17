@@ -6,77 +6,41 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 08:20:06 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 09:47:01 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:12:16 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-bool	last_first(char *s)
+bool	check_door(char **map, int x, int y)
 {
-	int i;
+	if (map[y - 1][x] == '1' && map[y + 1][x] == '1'
+		&& map[y][x - 1] != ' ' && map[y][x + 1] != ' ')
+		return (true);
+	else if (map[y][x - 1] == '1' && map[y][x + 1] == '1'
+		&& map[y + 1][x] != ' ' && map[y - 1][x] != ' ')
+		return (true);
+	return (false);
+}
 
-	i = -1;
-	while (s[++i])
+bool	check_line(char **map, int y, t_game *game)
+{
+	int	x;
+
+	x = -1;
+	if (!y || !map[y + 1])
+		return (true);
+	while (map[y][++x])
 	{
-		if (s[i] != '1' && s[i] != ' ')
+		if (map[y][x] == 'D' && !check_door(map, x, y))
 			return (false);
+		else if ((map[y][x] != '1' && map[y][x] != ' ' && map[y][x] != 'D')
+			&& (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
+			|| map[y][x + 1] == ' ' || map[y][x - 1] == ' '))
+			return (false);
+		if (map[y][x] != '1' && map[y][x] != ' ' && map[y][x] != '0')
+			game->p_view = map[y][x];
 	}
-	return (true);
-}
-
-bool	mdl_line(char *s)
-{
-	int	i;
-
-	while (s && *s && *s == ' ')
-		s++;
-	i = ft_strlen(s) - 1;
-	if (*s != '1')
-		return (false);
-	while (s[i] == ' ' && i >= 0)
-		i--;
-	if (s[i] != '1')
-		return (false);
-	return (true);
-}
-
-void	get_old_map(char **map)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (map[++y])
-	{
-		x = ft_strlen(map[y]) - 1;
-		while (x > 0 && map[y][x] == ' ' && map[y][x - 1] == ' ')
-			x--;
-		map[y][x] = '\0';
-	}
-}
-
-bool	final_check(char **map, t_game *game)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{
-			if ((map[y][x] != '1' && map[y][x] != ' ') && (map[y - 1][x] == ' '
-				|| map[y + 1][x] == ' ' || map[y][x + 1] == ' '
-				|| map[y][x - 1] == ' '))
-				return (false);
-			if (map[y][x] != '1' && map[y][x] != ' ' && map[y][x] != '0')
-				game->p_view = map[y][x];
-		}
-	}
-	if (!check_textures(game))
-		return (false);
 	return (true);
 }
 
@@ -101,4 +65,19 @@ bool	check_textures(t_game *game)
 		return (false);
 	mlx_delete_texture(tmp);
 	return (true);
+}
+
+char	*get_n_space(int n)
+{
+	char	*ret;
+	int		i;
+
+	ret = g_malloc(n + 1, MALLOC_S);
+	if (!ret)
+		return (NULL);
+	i = -1;
+	while (++i < n)
+		ret[i] = ' ';
+	ret[i] = '\0';
+	return (ret);
 }

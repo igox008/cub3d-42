@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 05:53:49 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 02:25:04 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:11:26 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ bool	check_assets(t_game *game)
 	return (true);
 }
 
-
-
 bool	not_valid_char(char *line, t_game *game)
 {
 	int			i;
@@ -44,7 +42,7 @@ bool	not_valid_char(char *line, t_game *game)
 			game->p_cnt++;
 		if (line[i] != ' ' && line[i] != '1' && line[i] != '0'
 			&& line[i] != 'N' && line[i] != 'S' && line[i] != 'E'
-			&& line[i] != 'W')
+			&& line[i] != 'W' && line[i] != 'D')
 			return (false);
 		if (game->p_cnt > 1)
 			return (false);
@@ -89,13 +87,14 @@ bool	final_map(t_game *game, char *last, int fd)
 			return (false);
 		else if (!mdl_line(game->map[i]))
 			return (false);
-		while ((int)ft_strlen(game->map[i]) < game->max_len)
-		{
-			game->map[i] = ft_strjoin(game->map[i], " ", MALLOC);
-			if (!game->map[i])
-				return (false);
-		}
+		game->map[i] = ft_strjoin(game->map[i],\
+		get_n_space(game->max_len - (int)ft_strlen(game->map[i])), MALLOC);
+		if (!game->map[i])
+			return (false);
+		if (i > 2 && !check_line(game->map, i - 1, game))
+			return (false);
 		i++;
 	}
+	game->h = i;
 	return (true);
 }

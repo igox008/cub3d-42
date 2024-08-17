@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 00:08:56 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 06:58:11 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 08:12:43 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void    innit_data(t_game *game)
 	innit_manjal(game->manjal);
 	game->hayad = false;
 	game->allo = false;
-	make_sound_thread(game);
 }
 
 bool	mlx_engine(t_game *game)

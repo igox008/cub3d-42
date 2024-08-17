@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movments.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:09:40 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/16 06:57:26 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:36:42 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ bool	check_wall(int x, int y, t_game *game)
 			|| tmp_x < 0 || tmp_y < 0 || tmp_x_1 < 0 || tmp_y_1 < 0 ||\
 			tmp_x_1 >= game->w || tmp_y_1 >= game->h))
 			return (1);
-	if (game->map[y][x] == '1'|| game->map[tmp_y][tmp_x] == '1' \
-		|| game->map[tmp_y][x] == '1' || game->map[y][tmp_x] == '1'\
-		|| game->map[tmp_y_1][tmp_x] == '1' || game->map[tmp_y][tmp_x_1] == '1')
+	if (game->map[y][x] == '1'|| game->map[y][x] == 'D' || game->map[tmp_y][tmp_x] == '1' || game->map[tmp_y][tmp_x] == 'D' \
+		|| game->map[tmp_y][x] == '1' || game->map[tmp_y][x] == 'D' || game->map[y][tmp_x] == '1' || game->map[y][tmp_x] == 'D'\
+		|| game->map[tmp_y_1][tmp_x] == '1' || game->map[tmp_y_1][tmp_x] == 'D' || game->map[tmp_y][tmp_x_1] == '1' || game->map[tmp_y][tmp_x_1] == 'D')
 		return (1);
 	return (0);
 }

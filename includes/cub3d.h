@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 06:55:46 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:20:34 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s___rays
 	double_t		angle_ray;
 	__globl_		*data;
 	bool			is_vert;
+	bool			is_door;
 } __rays_;
 
 typedef struct s_rgb
@@ -89,6 +90,8 @@ typedef struct s_var
 	int				x_v;
 	int				offst_x;
 	int				offst_y;
+	double_t		dx;
+	double_t		dy;
 	mouse_mode_t	mode;
 }	t_var;
 
@@ -110,6 +113,7 @@ typedef struct  s_game
 	t_img	i_we;
 	char    *ea;
 	t_img	i_ea;
+	t_img	door;
 	t_rgb   floor;
 	t_rgb   ceiling;
 	t_img	*mini_map;
@@ -186,6 +190,8 @@ typedef struct s_var_hor{
 void    innit_data(t_game *game);
 bool	mlx_engine(t_game *game);
 bool	parcing(char *file, t_game *game);
+char	*get_n_space(int n);
+bool	check_line(char **map, int y, t_game *game);
 char	*till_char(char *line);
 bool	ft_isspace(char c);
 bool	is_rgb(char *line);
@@ -217,7 +223,7 @@ __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);
 double_t		dis_between_to_points(double_t xa, double_t ya, double_t xb, double_t yb);
 void			ray_facing(__rays_ *ray, __globl_ *data);
 double_t		normalize_angle(double angle);
-bool			has_wall_at(double_t i, double_t j, t_game *game);
+bool			has_wall_at(double_t i, double_t j, t_game *game, __rays_ *ray);
 void			init_h(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);
 void			step_h(double_t *stepX, double_t *stepY ,__rays_ *ray);
 void			init_v(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);

@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:44:31 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/16 08:50:28 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 08:52:31 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ bool	parcing(char *file, t_game *game)
 	if (fd < 0)
 		return (false);
 	tmp = get_assets(fd, game);
-	if (!tmp|| !final_map(game, game->last, fd) || !final_check(game->map, game))
+	if (!tmp|| !final_map(game, game->last, fd))
 		return (close(fd), ft_putendl_fd("ERROR", 2), false);
 	game->floor.hex = get_rgba(game->floor.r, game->floor.g, game->floor.b, 255);
 	game->ceiling.hex = get_rgba(game->ceiling.r, game->ceiling.g, game->ceiling.b, 255);

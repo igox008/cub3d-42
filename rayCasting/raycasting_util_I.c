@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_util_I.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 09:01:55 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/13 19:23:24 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:17:53 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ double_t	normalize_angle(double angle)
 }
 
 
-bool	has_wall_at(double_t i, double_t j, t_game *game)
+bool	has_wall_at(double_t i, double_t j, t_game *game, __rays_ *ray)
 {
 	int	x;
 	int	y;
@@ -45,5 +45,9 @@ bool	has_wall_at(double_t i, double_t j, t_game *game)
 		return (1);
 	x = floor(i / TILE_SIZE);
 	y = floor(j / TILE_SIZE);
-	return (game->map && game->map[y] && game->map[y][x] && game->map[y][x] == '1');
+	if (game->map && game->map[y] && game->map[y][x] && (game->map[y][x] == '1'))
+		return (true);
+	else if (game->map && game->map[y] && game->map[y][x] && (game->map[y][x] == 'D'))
+		return (ray->is_door = true, true);
+	return (false);
 }

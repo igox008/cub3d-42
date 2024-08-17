@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:56:10 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 00:12:24 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:43:06 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,21 @@ int	render_full_map(t_game *g, t_img *m, t_var v)
 	double_t	ratio;
 
 	ratio = get_ratio(g, WIDTH - 1);
+	if (ratio > get_ratio(g, HEIGHT - 1))
+		ratio = get_ratio(g, HEIGHT - 1);
 	v.y = -1;
 	while (g->map[++v.y / TILE_SIZE])
 	{
 		v.x = -1;
 		while (g->map[v.y / TILE_SIZE][++v.x / TILE_SIZE])
 		{
-			if (g->map[v.y / TILE_SIZE][v.x / TILE_SIZE] == '1')
-				mlx_put_pixel(m->img, v.x * ratio, v.y * ratio, get_rgba(0, 0, 255, 200));
-			else
-				mlx_put_pixel(m->img, v.x * ratio, v.y * ratio, get_rgba(0, 0, 0, 200));
+			(1) && (v.x_v = v.x * ratio, v.y_v = v.y * ratio);
+			if (g->map[v.y / TILE_SIZE][v.x / TILE_SIZE] == '1' && v.x_v < WIDTH && v.y_v < HEIGHT)
+				mlx_put_pixel(m->img, v.x_v, v.y_v, get_rgba(0, 0, 255, 200));
+			else if (g->map[v.y / TILE_SIZE][v.x / TILE_SIZE] == 'D' && v.x_v < WIDTH && v.y_v < HEIGHT)
+				mlx_put_pixel(m->img, v.x_v, v.y_v, get_rgba(128, 0, 0, 200));
+			else if (v.x_v < WIDTH && v.y_v < HEIGHT)
+				mlx_put_pixel(m->img, v.x_v, v.y_v, get_rgba(0, 0, 0, 200));
 		}
 	}
 	put_player_full_map(g, m, ratio);
@@ -76,6 +81,8 @@ int	render_map(t_game *g, t_img *m, t_var v)
 		{
 			if (v.y > 0 && v.x > 0 && v.y < g->h * TILE_SIZE && v.x < g->w * TILE_SIZE && g->map[v.y / TILE_SIZE][v.x / TILE_SIZE] == '1')
 				mlx_put_pixel(m->img, v.x_i * ratio, v.y_i * ratio, get_rgba(0, 0, 255, 127));
+			else if (v.y > 0 && v.x > 0 && v.y < g->h * TILE_SIZE && v.x < g->w * TILE_SIZE && g->map[v.y / TILE_SIZE][v.x / TILE_SIZE] == 'D')
+				mlx_put_pixel(m->img, v.x_i * ratio, v.y_i * ratio, get_rgba(128, 0, 0, 127));
 			else
 				mlx_put_pixel(m->img, v.x_i * ratio, v.y_i * ratio, get_rgba(0, 0, 0, 127));
 			v.x++;	

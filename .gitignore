@@ -3,3 +3,5 @@
 *.tldr
 test.c
 a.out
+*.a
+cub3d

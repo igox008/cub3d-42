@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 03:01:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 00:12:29 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:22:25 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ bool	innit_txtrs(t_game *game)
 		return (false);
 	game->i_ea.pxls = get_pxls(game->ea, &game->i_ea, game);
 	if (!game->i_ea.pxls)
+		return (false);
+	game->door.pxls = get_pxls("textures/kaaba1.png", &game->door, game);
+	if (!game->door.pxls)
 		return (false);
 	return (true);
 }

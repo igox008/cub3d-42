@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/16 02:09:45 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:28:47 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double_t	horizontal_distance(t_game *game, __rays_ *ray, __globl_ *data)
 	while ((var.step_next_x >= 0 && var.step_next_x <= game->w * TILE_SIZE) \
 		&& (var.step_next_y >= 0 && var.step_next_y <= (game->h * TILE_SIZE)))
 	{
-		if (has_wall_at(var.step_next_x, var.step_next_y, game))
+		if (has_wall_at(var.step_next_x, var.step_next_y, game, ray))
 		{
 			(1) && (var.found_horz_wal_hit = 1, ray->coord_hit_h.x = \
 				var.step_next_x, ray->coord_hit_h.y = var.step_next_y);
@@ -52,7 +52,7 @@ double_t	vertical_distance(t_game *game, __rays_ *ray, __globl_ *data)
 	while ((var.step_next_x >= 0 && var.step_next_x <= game->w * TILE_SIZE) \
 	&& (var.step_next_y >= 0 && var.step_next_y <= game->h * TILE_SIZE))
 	{
-		if (has_wall_at(var.step_next_x, var.step_next_y, game))
+		if (has_wall_at(var.step_next_x, var.step_next_y, game, ray))
 		{
 			(1) && (var.found_vert_wal_hit = 1, ray->coord_hit_v.x \
 			= var.step_next_x, ray->coord_hit_v.y = var.step_next_y);
@@ -72,6 +72,7 @@ void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data, t_corr p, int i)
 	double_t	ver_dis;
 
 	(void)p;
+	ray->is_door = false;
 	ray_facing(ray, data);
 	hor_dis = horizontal_distance(game, ray, data);
 	ver_dis = vertical_distance(game, ray, data);
@@ -109,8 +110,6 @@ __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)
 	(1) && (p.x = game->ratio * game->p_pos.x, p.y = game->ratio * game->p_pos.y);
 	(1) && (i = -1, init_angle = game->angle_view \
 		- (FOV / 2), num_rays = WIDTH);
-	// clear_img(game->img->img);
-	// ft_memset(game->ray, 0, sizeof(__rays_));
 	ray = game->ray;
 	while (++i < num_rays && i < WIDTH)
 	{
