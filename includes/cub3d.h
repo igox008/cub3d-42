@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 11:20:34 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 12:07:43 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ typedef struct s___rays
 	__globl_		*data;
 	bool			is_vert;
 	bool			is_door;
+	bool			hit_door_v;
+	bool			hit_door_h;
+	int				cnt_hit_door;
 } __rays_;
 
 typedef struct s_rgb
@@ -223,7 +226,8 @@ __INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data);
 double_t		dis_between_to_points(double_t xa, double_t ya, double_t xb, double_t yb);
 void			ray_facing(__rays_ *ray, __globl_ *data);
 double_t		normalize_angle(double angle);
-bool			has_wall_at(double_t i, double_t j, t_game *game, __rays_ *ray);
+bool			has_wall_at_v(double_t i, double_t j, t_game *game, __rays_ *ray);
+bool			has_wall_at_h(double_t i, double_t j, t_game *game, __rays_ *ray);
 void			init_h(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);
 void			step_h(double_t *stepX, double_t *stepY ,__rays_ *ray);
 void			init_v(double_t *initX,double_t *initY,t_game *game, __rays_ *ray);

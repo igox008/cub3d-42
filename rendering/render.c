@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:06:54 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 11:24:31 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 13:32:26 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_rect(t_img *img, int x, int y_start, int y_end, int color)
 
 t_img	get_img(t_game *game, __rays_	*ray)
 {
-	if (ray->is_door)
+	if ((ray->is_vert && ray->hit_door_v) || (!ray->is_vert && ray->hit_door_h))
 		return (game->door);
 	if (ray->is_vert)
 	{

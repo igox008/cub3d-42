@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 09:01:55 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/17 11:17:53 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 13:29:42 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ double_t	normalize_angle(double angle)
 }
 
 
-bool	has_wall_at(double_t i, double_t j, t_game *game, __rays_ *ray)
+bool	has_wall_at_v(double_t i, double_t j, t_game *game, __rays_ *ray)
 {
 	int	x;
 	int	y;
@@ -46,8 +46,25 @@ bool	has_wall_at(double_t i, double_t j, t_game *game, __rays_ *ray)
 	x = floor(i / TILE_SIZE);
 	y = floor(j / TILE_SIZE);
 	if (game->map && game->map[y] && game->map[y][x] && (game->map[y][x] == '1'))
-		return (true);
-	else if (game->map && game->map[y] && game->map[y][x] && (game->map[y][x] == 'D'))
-		return (ray->is_door = true, true);
+		return (ray->hit_door_v = false, true);
+	else if (game->map && game->map[y] && game->map[y][x] && game->map[y][x] == 'D')
+		return (ray->hit_door_v = true, true);
+	return (false);
+}
+
+bool	has_wall_at_h(double_t i, double_t j, t_game *game, __rays_ *ray)
+{
+	int	x;
+	int	y;
+
+	if (i < 0 || i > (game->w * TILE_SIZE) \
+	|| j < 0 || j > (game->h * TILE_SIZE))
+		return (1);
+	x = floor(i / TILE_SIZE);
+	y = floor(j / TILE_SIZE);
+	if (game->map && game->map[y] && game->map[y][x] && (game->map[y][x] == '1'))
+		return (ray->hit_door_h = false, true);
+	else if (game->map && game->map[y] && game->map[y][x] && game->map[y][x] == 'D')
+		return (ray->hit_door_h = true, true);
 	return (false);
 }
