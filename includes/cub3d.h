@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 00:17:36 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 06:55:46 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <fcntl.h>
 #include "../MLX42/include/MLX42.h"
 #include <stdio.h>
+#include <pthread.h>
 #include <math.h>
 # define EPS_IN_IFIC (SIGCHLD * (0x00008 + SIG_BLOCK ))
 # include <signal.h>
@@ -134,6 +135,11 @@ typedef struct  s_game
 	t_var		v;
 	double_t	wall_h;
 	bool		full_map;
+	mlx_texture_t	**manjal;
+	bool			hayad;
+	bool			allo;
+	pthread_t		thrd;
+	pthread_mutex_t	mtx;
 }   t_game;
 
 typedef struct s__General
@@ -168,6 +174,14 @@ typedef struct s_var_hor{
 # define BLUE 0x0000FF
 # define GRAY 0x808080
 # define MINI_MAP_SIZE 400
+# define MN "./textures/manjal/manjal.png"
+# define MN1 "./textures/manjal/manjal1.png"
+# define MN2 "./textures/manjal/manjal2.png"
+# define MN3 "./textures/manjal/manjal3.png"
+# define MN4 "./textures/manjal/manjal4.png"
+# define MN5 "./textures/manjal/manjal5.png"
+# define MN6 "./textures/manjal/manjal6.png"
+# define MN7 "./textures/manjal/manjal7.png"
 
 void    innit_data(t_game *game);
 bool	mlx_engine(t_game *game);
@@ -215,9 +229,14 @@ unsigned int	*get_pxls(char *path, t_img *txtr, t_game *g);
 bool			innit_txtrs(t_game *game);
 int				render_full_map(t_game *g, t_img *m, t_var v);
 int				put_player_full_map(t_game *game, t_img *img, double_t ratio);
-int				play_sound(void);
+void    		*play_sound(void *ptr);
 void			driver(void *ptr);
 void			hooks(mlx_key_data_t keydata, void* param);
 void			cursor_hook(double xpos, double ypos, void* param);
+void			draw_txttr(mlx_image_t *img, mlx_texture_t *m, t_game *g);
+mlx_texture_t	*load_txtr(char *path);
+void			innit_manjal(mlx_texture_t **arr);
+void			animate_manjal(t_game *game);
+void			make_sound_thread(t_game *game);
 
 #endif

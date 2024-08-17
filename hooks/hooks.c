@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 00:05:24 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 00:07:21 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 07:00:35 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	hooks(mlx_key_data_t keydata, void* param)
 		clear_img(game->mini_map->img);
 		game->full_map = false;
 	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_SPACE))
-		play_sound();
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_SPACE) && !game->hayad)
+		(1) && (pthread_mutex_lock(&game->mtx), game->allo = true,\
+		pthread_mutex_unlock(&game->mtx), game->hayad = true);
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_C))
 	{
 		if (game->v.mode == MLX_MOUSE_HIDDEN)
@@ -61,6 +62,8 @@ void	driver(void *ptr)
 		render_full_map(game, game->mini_map, game->v);
 	else
 		render_map(game, game->mini_map, game->v);
+	if (game->hayad)
+		animate_manjal(game);
 	cast_all_rays(game, game->data);
 }
 

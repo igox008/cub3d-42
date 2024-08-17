@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 00:08:56 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 00:12:34 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 06:58:11 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	clear_img(mlx_image_t *img)
 	int	x;
 
 	y = -1;
-	while (++y < HEIGHT)
+	while (++y < (int)img->height)
 	{
 		x = -1;
-		while (++x < WIDTH)
+		while (++x < (int)img->width)
 			mlx_put_pixel(img, x, y, get_rgba(255, 255, 255, 0));
 	}
 }
@@ -38,13 +38,20 @@ void    innit_data(t_game *game)
     game->rotation_speed = 2 * M_PI / 180;
 	game->full_map = false;
 	game->v.mode = MLX_MOUSE_NORMAL;
+	game->manjal = g_malloc(sizeof(mlx_texture_t *) * 15, MALLOC);
+	if (!game->manjal)
+		return (ft_putendl_fd("MALLOC ERROR", 2), exit(1));
+	innit_manjal(game->manjal);
+	game->hayad = false;
+	game->allo = false;
+	make_sound_thread(game);
 }
 
 bool	mlx_engine(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	set_w_h(game);
-	(game->mlx) && (game->fp = mlx_load_png("textures/player pov.png"));
+	(game->mlx) && (game->fp = mlx_load_png(MN));
 	if (!game->mlx || !innit_txtrs(game) || !game->fp)
 		return (false);
 	game->mini_map = g_malloc(sizeof(t_img), MALLOC);
@@ -56,11 +63,55 @@ bool	mlx_engine(t_game *game)
 	game->mini_map->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (!game->mini_map->img || !game->img->img)
 		return (false);
-	game->plyr_img = mlx_texture_to_image(game->mlx, game->fp);
-	if (!game->plyr_img)
+	game->plyr_img = mlx_new_image(game->mlx, 700, 700);
+	if (!game->plyr_img || !game->plyr_img)
 		return (false);
 	mlx_image_to_window(game->mlx, game->img->img, 0, 0);
-	mlx_image_to_window(game->mlx, game->plyr_img, (WIDTH / 2) - (500 / 2), HEIGHT - 408);
+	mlx_image_to_window(game->mlx, game->plyr_img, (WIDTH / 2) - (game->plyr_img->width / 2), HEIGHT - game->plyr_img->height);
+	draw_txttr(game->plyr_img, game->fp, game);
 	mlx_image_to_window(game->mlx, game->mini_map->img, 0, 0);
 	return (true);
+}
+
+void	draw_txttr(mlx_image_t *img, mlx_texture_t *m, t_game *g)
+{
+	int			x;
+	int			y;
+	int			i;
+	uint32_t	color;
+	mlx_image_t	*t;
+
+	y = 0;
+	i = 0;
+	t = mlx_texture_to_image(g->mlx, m);
+	if (!t || !mlx_resize_image(t, 700, 700))
+		return (g_malloc(0, FREE), ft_putendl_fd("ERROR", 2), exit(1));
+	while (y < 700)
+	{
+		x = 0;
+		while (x < 700)
+		{
+			color = get_rgba(t->pixels[i], t->pixels[i + 1], t->pixels[i + 2], t->pixels[i + 3]);
+			mlx_put_pixel(img, x, y, color);
+			x++;
+			i += 4;
+		}
+		y++;
+	}
+	mlx_delete_image(g->mlx, t);
+}
+
+void	animate_manjal(t_game *game)
+{
+	static	int	it;
+
+	if (!game->manjal[it])
+		(1) && (game->hayad = false, it = 0);
+	else
+	{
+		clear_img(game->plyr_img);
+		draw_txttr(game->plyr_img, game->manjal[it], game);
+	}
+	if (game->hayad)
+		it++;
 }

@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 00:10:58 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/17 04:47:11 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_putendl_fd("ERROR", 2), 1);
 	if (!parcing(av[1], &game))
-		return (g_malloc(0, FREE), 1);
+		return (g_malloc(0, FREE), g_malloc(0, FREE_S), 1);
 	if (!mlx_engine(&game))
 		return (g_malloc(0, FREE), 1);
 	game.data = g_malloc(sizeof(__globl_), MALLOC);
