@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 01:56:47 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 02:32:41 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:52:14 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,16 @@ static void	clear_all(t_col **head)
 	}
 	*head = NULL;
 }
-#include <stdio.h>
+
 void	*g_malloc(size_t size, t_call call)
 {
 	static t_col	*long_term;
 	static t_col	*short_term;
 	void			*ptr;
-	static size_t	all;
-	static int	nodes_count;
 
 	if (call == MALLOC || call == MALLOC_S)
 	{
 		ptr = malloc(size);
-		if (call == MALLOC)
-			(all += size + sizeof(t_col), nodes_count++);
 		if (!ptr && call == MALLOC)
 			return (clear_all(&long_term), NULL);
 		else if (!ptr && call == MALLOC_S)
@@ -93,7 +89,5 @@ void	*g_malloc(size_t size, t_call call)
 		clear_all(&long_term);
 	else if (call == FREE_S)
 		clear_all(&short_term);
-	else if (call == GET_SIZE)
-		printf("allocated size : %.2f | node count : %d\n", all / 1048576.0, nodes_count);
 	return (NULL);
 }

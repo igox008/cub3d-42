@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 05:53:49 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 11:11:26 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:48:34 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ bool	final_map(t_game *game, char *last, int fd)
 			return (false);
 		else if (!mdl_line(game->map[i]))
 			return (false);
-		game->map[i] = ft_strjoin(game->map[i],\
+		game->map[i] = ft_strjoin(game->map[i], \
 		get_n_space(game->max_len - (int)ft_strlen(game->map[i])), MALLOC);
 		if (!game->map[i])
 			return (false);

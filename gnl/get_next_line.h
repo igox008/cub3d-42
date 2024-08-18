@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 04:35:02 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/13 23:03:27 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:54:20 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-#include "../libft/libft.h"
+# include "../libft/libft.h"
 
 char	*get_next_line(int fd);
 char	*fill(char *buff);

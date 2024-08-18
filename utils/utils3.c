@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 04:39:58 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 05:37:29 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 18:34:19 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,36 @@ void	innit_manjal(mlx_texture_t **arr)
 	arr[12] = arr[0];
 	arr[13] = load_txtr(MN);
 	arr[14] = NULL;
+}
+
+bool	norm_rm(t_var v, t_game *g)
+{
+	if (v.y > 0 && v.x > 0 && v.y < g->h * TILE_SIZE && v.x < g->w * TILE_SIZE)
+		return (true);
+	return (false);
+}
+
+void	_door_(t_game *game, bool open, t_globl_ *data)
+{
+	int			x;
+	int			y;
+
+	(1) && (x = (int)game->p_pos.x / TILE_SIZE, \
+	y = (int)game->p_pos.y / TILE_SIZE);
+	if (data->facing_down && open && game->map[y + 1][x] == 'D')
+		game->map[y + 1][x] = 'O';
+	else if (data->facing_up && open && game->map[y - 1][x] == 'D')
+		game->map[y - 1][x] = 'O';
+	else if (data->facing_left && open && game->map[y][x - 1] == 'D')
+		game->map[y][x - 1] = 'O';
+	else if (data->facing_right && open && game->map[y][x + 1] == 'D')
+		game->map[y][x + 1] = 'O';
+	else if (data->facing_down && !open && game->map[y + 1][x] == 'O')
+		game->map[y + 1][x] = 'D';
+	else if (data->facing_up && !open && game->map[y - 1][x] == 'O')
+		game->map[y - 1][x] = 'D';
+	else if (data->facing_left && !open && game->map[y][x - 1] == 'O')
+		game->map[y][x - 1] = 'D';
+	else if (data->facing_right && !open && game->map[y][x + 1] == 'O')
+		game->map[y][x + 1] = 'D';
 }

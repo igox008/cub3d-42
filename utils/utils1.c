@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 03:01:05 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 11:22:25 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:31:19 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	put_player_full_map(t_game *game, t_img *img, double_t ratio)
 		v.x = (int)game->p_pos.x - 30;
 		while (v.x <= v.x_i)
 		{
-			mlx_put_pixel(img->img, v.x * ratio, v.y * ratio, get_rgba(0, 255, 0, 200));
+			mlx_put_pixel(img->img, v.x * ratio, \
+			v.y * ratio, get_rgba(0, 255, 0, 200));
 			v.x++;
 		}
 		v.y++;
@@ -60,7 +61,7 @@ int	put_player_full_map(t_game *game, t_img *img, double_t ratio)
 
 uint32_t	get_rgba(int r, int g, int b, int a)
 {
-    return (r << 24 | g << 16 | b << 8 | a);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 unsigned int	*get_pxls(char *path, t_img *txtr, t_game *g)
@@ -79,8 +80,8 @@ unsigned int	*get_pxls(char *path, t_img *txtr, t_game *g)
 	(1) && (v.x = 0, v.y = 0);
 	while (v.y < TILE_SIZE * TILE_SIZE * 4)
 	{
-		pxls[v.x++] = (uint32_t)get_rgba(img->pixels[v.y], img->pixels[v.y + 1],\
-		img->pixels[v.y + 2], img->pixels[v.y + 3]);
+		pxls[v.x++] = (uint32_t)get_rgba(img->pixels[v.y], \
+		img->pixels[v.y + 1], img->pixels[v.y + 2], img->pixels[v.y + 3]);
 		v.y += 4;
 	}
 	mlx_delete_texture(txtr->txtr);
@@ -101,7 +102,7 @@ bool	innit_txtrs(t_game *game)
 	game->i_ea.pxls = get_pxls(game->ea, &game->i_ea, game);
 	if (!game->i_ea.pxls)
 		return (false);
-	game->door.pxls = get_pxls("textures/kaaba1.png", &game->door, game);
+	game->door.pxls = get_pxls("textures/door.png", &game->door, game);
 	if (!game->door.pxls)
 		return (false);
 	return (true);

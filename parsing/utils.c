@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 11:12:24 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:48:19 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	set_w_h(t_game *game)
 
 bool	last_first(char *s)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (s[++i])

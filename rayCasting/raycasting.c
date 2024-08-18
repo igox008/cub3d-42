@@ -6,13 +6,13 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:35:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/17 13:31:12 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:48:03 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-double_t	horizontal_distance(t_game *game, __rays_ *ray, __globl_ *data)
+double_t	horizontal_distance(t_game *game, t_rays_ *ray, t_globl_ *data)
 {
 	t_var_hor	var;
 
@@ -36,10 +36,10 @@ double_t	horizontal_distance(t_game *game, __rays_ *ray, __globl_ *data)
 	if (var.found_horz_wal_hit)
 		return (dis_between_to_points(game->p_pos.x, game->p_pos.y, \
 			ray->coord_hit_h.x, ray->coord_hit_h.y));
-	return (DBL_MAX);
+	return (__DBL_MAX__);
 }
 
-double_t	vertical_distance(t_game *game, __rays_ *ray, __globl_ *data)
+double_t	vertical_distance(t_game *game, t_rays_ *ray, t_globl_ *data)
 {
 	t_var_hor	var;
 
@@ -63,16 +63,16 @@ double_t	vertical_distance(t_game *game, __rays_ *ray, __globl_ *data)
 	if (var.found_vert_wal_hit)
 		return (dis_between_to_points(game->p_pos.x, game->p_pos.y, \
 		ray->coord_hit_v.x, ray->coord_hit_v.y));
-	return (DBL_MAX);
+	return (__DBL_MAX__);
 }
 
-void	cast_ray(__rays_ *ray, t_game *game, __globl_ *data, t_corr p, int i)
+void	cast_ray(t_rays_ *ray, t_game *game, t_globl_ *data, int i)
 {
 	double_t	hor_dis;
 	double_t	ver_dis;
 
-	(void)p;
-	(1) && (ray->is_door = false, ray->hit_door_h = false, ray->hit_door_v = false);
+	(1) && (ray->is_door = false, \
+	ray->hit_door_h = false, ray->hit_door_v = false);
 	ray_facing(ray, data);
 	hor_dis = horizontal_distance(game, ray, data);
 	ver_dis = vertical_distance(game, ray, data);
@@ -99,22 +99,20 @@ double_t	get_view(char dir)
 	return (M_PI);
 }
 
-__INT32_TYPE__	cast_all_rays(t_game *game, __globl_ *data)
+__INT32_TYPE__	cast_all_rays(t_game *game, t_globl_ *data)
 {
 	double_t			init_angle;
-	__rays_				*ray;
+	t_rays_				*ray;
 	__INT32_TYPE__		i;
 	__INT32_TYPE__		num_rays;
-	t_corr				p;
 
-	(1) && (p.x = game->ratio * game->p_pos.x, p.y = game->ratio * game->p_pos.y);
 	(1) && (i = -1, init_angle = game->angle_view \
 		- (FOV / 2), num_rays = WIDTH);
 	ray = game->ray;
 	while (++i < num_rays && i < WIDTH)
 	{
 		ray->angle_ray = normalize_angle(init_angle);
-		cast_ray(ray, game, data, p, i);
+		cast_ray(ray, game, data, i);
 		init_angle += FOV / num_rays;
 	}
 	return (1);

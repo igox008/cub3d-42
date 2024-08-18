@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:44:31 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 08:52:31 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:52:52 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*skip_empty(int fd)
 	while (ret)
 	{
 		if (ft_strcmp(ret, "\n"))
-			break;
+			break ;
 		ret = get_next_line(fd);
 	}
 	if (ret)
@@ -74,7 +74,8 @@ char	*get_assets(int fd, t_game *game)
 	tmp = skip_empty(fd);
 	while (tmp)
 	{
-		(game->last = ft_strdup(tmp, MALLOC_S), tmp = till_char(tmp));
+		(1) && (game->last = ft_strdup(tmp, \
+		MALLOC_S), tmp = till_char(tmp));
 		if (!tmp)
 			return (NULL);
 		if (!game->ea && !ft_strncmp(tmp, "EA ", 3))
@@ -91,14 +92,13 @@ char	*get_assets(int fd, t_game *game)
 			break ;
 		tmp = skip_empty(fd);
 	}
-	if (!check_assets(game))
-		return (NULL);
+	(!check_assets(game)) && (tmp = NULL);
 	return (tmp);
 }
 
 bool	parcing(char *file, t_game *game)
 {
-	int	fd;
+	int		fd;
 	char	*tmp;
 
 	if (!check_ext(file))
@@ -107,10 +107,12 @@ bool	parcing(char *file, t_game *game)
 	if (fd < 0)
 		return (false);
 	tmp = get_assets(fd, game);
-	if (!tmp|| !final_map(game, game->last, fd))
+	if (!tmp || !final_map(game, game->last, fd))
 		return (close(fd), ft_putendl_fd("ERROR", 2), false);
-	game->floor.hex = get_rgba(game->floor.r, game->floor.g, game->floor.b, 255);
-	game->ceiling.hex = get_rgba(game->ceiling.r, game->ceiling.g, game->ceiling.b, 255);
+	game->floor.hex = get_rgba(game->floor.r, \
+	game->floor.g, game->floor.b, 255);
+	game->ceiling.hex = get_rgba(game->ceiling.r, \
+	game->ceiling.g, game->ceiling.b, 255);
 	g_malloc(0, FREE_S);
 	return (true);
 }

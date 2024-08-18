@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 02:14:14 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/15 02:21:51 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:42:00 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**ft_split(char const *s, char *del, t_call call)
 
 	if (!s)
 		return (NULL);
-	(wc = count_w(s, del), index = -1);
+	(1) && (wc = count_w(s, del), index = -1);
 	arr = g_malloc((sizeof(char *)) * (wc + 1), call);
 	if (!arr)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 09:01:55 by amel-has          #+#    #+#             */
-/*   Updated: 2024/08/17 13:29:42 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:42:31 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ double_t	dis_between_to_points(double_t xa, double_t ya, \
 	return (sqrt(pow((xb - xa), 2) + pow((yb - ya), 2)));
 }
 
-void	ray_facing(__rays_ *ray, __globl_ *data)
+void	ray_facing(t_rays_ *ray, t_globl_ *data)
 {
 	data->facing_down = ray->angle_ray > 0 && ray->angle_ray < M_PI;
 	data->facing_up = !data->facing_down;
@@ -34,8 +34,7 @@ double_t	normalize_angle(double angle)
 	return (angle);
 }
 
-
-bool	has_wall_at_v(double_t i, double_t j, t_game *game, __rays_ *ray)
+bool	has_wall_at_v(double_t i, double_t j, t_game *game, t_rays_ *ray)
 {
 	int	x;
 	int	y;
@@ -45,14 +44,16 @@ bool	has_wall_at_v(double_t i, double_t j, t_game *game, __rays_ *ray)
 		return (1);
 	x = floor(i / TILE_SIZE);
 	y = floor(j / TILE_SIZE);
-	if (game->map && game->map[y] && game->map[y][x] && (game->map[y][x] == '1'))
+	if (game->map && game->map[y] && \
+		game->map[y][x] && (game->map[y][x] == '1'))
 		return (ray->hit_door_v = false, true);
-	else if (game->map && game->map[y] && game->map[y][x] && game->map[y][x] == 'D')
+	else if (game->map && game->map[y] \
+		&& game->map[y][x] && game->map[y][x] == 'D')
 		return (ray->hit_door_v = true, true);
 	return (false);
 }
 
-bool	has_wall_at_h(double_t i, double_t j, t_game *game, __rays_ *ray)
+bool	has_wall_at_h(double_t i, double_t j, t_game *game, t_rays_ *ray)
 {
 	int	x;
 	int	y;
@@ -62,9 +63,11 @@ bool	has_wall_at_h(double_t i, double_t j, t_game *game, __rays_ *ray)
 		return (1);
 	x = floor(i / TILE_SIZE);
 	y = floor(j / TILE_SIZE);
-	if (game->map && game->map[y] && game->map[y][x] && (game->map[y][x] == '1'))
+	if (game->map && game->map[y] \
+		&& game->map[y][x] && (game->map[y][x] == '1'))
 		return (ray->hit_door_h = false, true);
-	else if (game->map && game->map[y] && game->map[y][x] && game->map[y][x] == 'D')
+	else if (game->map && game->map[y] \
+		&& game->map[y][x] && game->map[y][x] == 'D')
 		return (ray->hit_door_h = true, true);
 	return (false);
 }

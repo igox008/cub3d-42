@@ -6,19 +6,19 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:06:54 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 13:32:26 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:41:38 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	draw_rect(t_img *img, int x, int y_start, int y_end, int color)
+void	draw_rect(t_img *img, t_var v, int color)
 {
-	while (y_start < y_end && y_start < HEIGHT && y_start >= 0)
-		mlx_put_pixel(img->img, x, y_start++, color);
+	while (v.y_i < v.y && v.y_i < HEIGHT && v.y_i >= 0)
+		mlx_put_pixel(img->img, v.x, v.y_i++, color);
 }
 
-t_img	get_img(t_game *game, __rays_	*ray)
+t_img	get_img(t_game *game, t_rays_	*ray)
 {
 	if ((ray->is_vert && ray->hit_door_v) || (!ray->is_vert && ray->hit_door_h))
 		return (game->door);
@@ -38,8 +38,8 @@ t_img	get_img(t_game *game, __rays_	*ray)
 
 void	draw_texture(t_game *g, int x, int y_start, int y_end)
 {
-	t_var	v;
-	__rays_	*ray;
+	t_var		v;
+	t_rays_		*ray;
 	uint32_t	color_idx;
 
 	ray = g->ray;
@@ -58,7 +58,7 @@ void	draw_texture(t_game *g, int x, int y_start, int y_end)
 	}
 }
 
-int	render_ray(__rays_ *ray, t_game *game, int i)
+int	render_ray(t_rays_ *ray, t_game *game, int i)
 {
 	double_t	proj_dist;
 	double_t	wall_h;
@@ -66,15 +66,18 @@ int	render_ray(__rays_ *ray, t_game *game, int i)
 	double_t	top;
 	double_t	bott;
 
-	ray_d = ray->distance * cos(normalize_angle(ray->angle_ray) - game->angle_view);
+	ray_d = ray->distance * \
+	cos(normalize_angle(ray->angle_ray) - game->angle_view);
 	proj_dist = (WIDTH / 2) / tan(FOV / 2);
 	wall_h = (TILE_SIZE / ray_d) * proj_dist;
 	top = (HEIGHT / 2) - (wall_h / 2);
 	bott = (HEIGHT / 2) + (wall_h / 2);
 	game->ray = ray;
 	game->wall_h = wall_h;
-	draw_rect(game->img, i, 0, top, game->ceiling.hex);
-	draw_rect(game->img, i, bott, HEIGHT - 1, game->floor.hex);
+	draw_rect(game->img, (t_var){.x = i, \
+	.y_i = 0, .y = top}, game->ceiling.hex);
+	draw_rect(game->img, (t_var){.x = i, \
+	.y_i = bott, .y = HEIGHT - 1}, game->floor.hex);
 	if (top < 0)
 		top = 0;
 	else if (top >= HEIGHT)

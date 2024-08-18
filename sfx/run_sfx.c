@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 23:05:47 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 08:19:24 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:10:05 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,34 @@ void	make_sound_thread(t_game *game)
 	pthread_detach(game->thrd);
 }
 
-void    *play_sound(void *ptr)
+int	set_bool(t_game *game, bool set, bool *org)
 {
-	t_game  *game;
+	pthread_mutex_lock(&game->mtx);
+	*org = set;
+	pthread_mutex_unlock(&game->mtx);
+	return (1);
+}
+
+bool	get_bool(t_game *game, bool *get)
+{
+	bool	ret;
+
+	pthread_mutex_lock(&game->mtx);
+	ret = *get;
+	pthread_mutex_unlock(&game->mtx);
+	return (ret);
+}
+
+void	*play_sound(void *ptr)
+{
+	t_game	*game;
 
 	game = (t_game *)ptr;
-	while (1)
+	while (!get_bool(game, &game->stop))
 	{
-		pthread_mutex_lock(&game->mtx);
-		if (game->allo)
-		{
-			system("/Users/alaassir/.brew/bin/mpg123 sfx/7ayd_3liya.mp3 > /dev/null 2>&1");
-			game->allo = false;
-		}
-		pthread_mutex_unlock(&game->mtx);
+		if (get_bool(game, &game->allo))
+			(1) && (system("/Users/alaassir/.brew/bin/mpg123 sfx/7ayd_3liya.mp3 \
+			> /dev/null 2>&1"), set_bool(game, false, &game->allo));
 	}
 	return (NULL);
 }
