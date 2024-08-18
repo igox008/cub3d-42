@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 12:07:43 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 08:25:45 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,5 +248,6 @@ mlx_texture_t	*load_txtr(char *path);
 void			innit_manjal(mlx_texture_t **arr);
 void			animate_manjal(t_game *game);
 void			make_sound_thread(t_game *game);
+void			_door_(t_game *game, bool open);
 
 #endif

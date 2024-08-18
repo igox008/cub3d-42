@@ -6,13 +6,13 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 00:05:24 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/17 07:00:35 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/18 08:28:40 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	cursor_hook(double xpos, double ypos, void* param)
+void	cursor_hook(double xpos, double ypos, void *param)
 {
 	t_game	*game;
 
@@ -20,18 +20,17 @@ void	cursor_hook(double xpos, double ypos, void* param)
 	(void)ypos;
 	if (!game->full_map && game->v.mode == MLX_MOUSE_HIDDEN)
 	{
-		game->angle_view += ((xpos - WIDTH/2) * (M_PI / 180)) * 0.1;
+		game->angle_view += ((xpos - WIDTH / 2) * (M_PI / 180)) * 0.1;
 		mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
 	}
 }
 
-void	hooks(mlx_key_data_t keydata, void* param)
+void	hooks(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
 	game = (t_game *)param;
 	(void)keydata;
-	// if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) && !game->full_map)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) && !game->full_map)
 		game->full_map = true;
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) && game->full_map)
@@ -39,8 +38,10 @@ void	hooks(mlx_key_data_t keydata, void* param)
 		clear_img(game->mini_map->img);
 		game->full_map = false;
 	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_SPACE) && !game->hayad)
-		(1) && (pthread_mutex_lock(&game->mtx), game->allo = true,\
+	else if ((mlx_is_key_down(game->mlx, MLX_KEY_SPACE)
+			|| mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
+		&& !game->hayad)
+		(1) && (pthread_mutex_lock(&game->mtx), game->allo = true, \
 		pthread_mutex_unlock(&game->mtx), game->hayad = true);
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_C))
 	{
@@ -74,9 +75,40 @@ void	listen_hook(void *ptr)
 	game = (t_game *)ptr;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		return (printf("You pressed ESC\n"), red_x(game));
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_O))
+		_door_(game, true);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_F))
+		_door_(game, false);
 	if (game->full_map)
 		return ;
 	key_up_down(game);
 	key_left_right(game);
 	key_rl(game);
+}
+
+void	_door_(t_game *game, bool open)
+{
+	int			x;
+	int			y;
+	__globl_	*data;
+
+	x = (int)game->p_pos.x / TILE_SIZE;
+	y = (int)game->p_pos.y / TILE_SIZE;
+	data = game->ray->data;
+	if (data->facing_down && open && game->map[y + 1][x] == 'D')
+		game->map[y + 1][x] = 'O';
+	else if (data->facing_up && open && game->map[y - 1][x] == 'D')
+		game->map[y - 1][x] = 'O';
+	else if (data->facing_left && open && game->map[y][x - 1] == 'D')
+		game->map[y][x - 1] = 'O';
+	else if (data->facing_right && open && game->map[y][x + 1] == 'D')
+		game->map[y][x + 1] = 'O';
+	else if (data->facing_down && !open && game->map[y + 1][x] == 'O')
+		game->map[y + 1][x] = 'D';
+	else if (data->facing_up && !open && game->map[y - 1][x] == 'O')
+		game->map[y - 1][x] = 'D';
+	else if (data->facing_left && !open && game->map[y][x - 1] == 'O')
+		game->map[y][x - 1] = 'D';
+	else if (data->facing_right && !open && game->map[y][x + 1] == 'O')
+		game->map[y][x + 1] = 'D';
 }
