@@ -1,7 +1,7 @@
 NO ./mandatory/textures/wall.png
 SO ./mandatory/textures/wall.png
 WE ./mandatory/textures/wall.png
-EA ./mandatory/textures/wall.pn
+EA ./mandatory/textures/wall.png
 
 F 112,128,144
 C 135,206,235
