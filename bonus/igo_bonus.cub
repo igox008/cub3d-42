@@ -3,7 +3,7 @@ SO ./bonus/textures/wall.png
 WE ./bonus/textures/wall.png
 EA ./bonus/textures/wall.png
 
-F 112,128,144
+F 112,128,,,,,144
 C 135,206,235
 
 
