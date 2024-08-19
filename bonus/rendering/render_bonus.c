@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:06:54 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 09:20:26 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:43:47 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ t_img	get_img(t_game *game, t_rays_	*ray)
 	if (ray->is_vert)
 	{
 		if (cos(ray->angle_ray) < 0)
-			return (game->i_ea);
-		return (game->i_so);
+			return (game->i_we);
+		return (game->i_ea);
 	}
 	else
 	{
 		if (sin(ray->angle_ray) < 0)
 			return (game->i_no);
-		return (game->i_we);
+		return (game->i_so);
 	}
 }
 

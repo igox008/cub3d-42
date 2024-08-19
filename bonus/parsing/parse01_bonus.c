@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 08:20:06 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 10:18:58 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:03:34 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,21 @@
 
 bool	check_door(char **map, int x, int y)
 {
-	if (map[y - 1][x] == '1' && map[y + 1][x] == '1'
-		&& map[y][x - 1] != ' ' && map[y][x + 1] != ' ')
+	t_var	v;
+
+	v.x = 0;
+	v.y = 0;
+	if (map[y - 1][x] == '1')
+		v.y++;
+	if (map[y + 1][x] == '1')
+		v.y++;
+	if (map[y][x - 1] == '1')
+		v.x++;
+	if (map[y][x + 1] == '1')
+		v.x++;
+	if (v.x == 2 && map[y + 1][x] == '0' && map[y - 1][x] == '0')
 		return (true);
-	else if (map[y][x - 1] == '1' && map[y][x + 1] == '1'
-		&& map[y + 1][x] != ' ' && map[y - 1][x] != ' ')
+	else if (v.y == 2 && map[y][x + 1] == '0' && map[y][x - 1] == '0')
 		return (true);
 	return (false);
 }
@@ -38,7 +48,7 @@ bool	check_line(char **map, int y, t_game *game)
 			&& (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
 			|| map[y][x + 1] == ' ' || map[y][x - 1] == ' '))
 			return (false);
-		if (map[y][x] != '1' && map[y][x] != ' ' 
+		if (map[y][x] != '1' && map[y][x] != ' '
 			&& map[y][x] != '0' && map[y][x] != 'D')
 			game->p_view = map[y][x];
 	}

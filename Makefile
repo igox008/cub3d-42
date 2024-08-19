@@ -26,7 +26,7 @@ FLAGS_MAND =  $(MLX_MAND) -Wall -Wextra -Werror -g
 
 LIBDIR_MAND = mandatory/libft
 LIBFT_MAND = -I$(LIBDIR_MAND) -L$(LIBDIR_MAND) -lft
-NAME = cub3d
+NAME = cub3D
 MAND_INCLUDES = mandatory/libft/libft.h mandatory/includes/cub3d.h mandatory/g_col/g_collector.h mandatory/gnl/get_next_line.h
 MAND_SRC = mandatory/cub3d.c mandatory/g_col/g_collector.c mandatory/gnl/get_next_line.c mandatory/gnl/get_next_line_utils.c \
 			mandatory/hooks/hooks.c mandatory/mouvements/movments.c mandatory/parsing/parse00.c mandatory/parsing/parse01.c mandatory/parsing/parse_utils00.c \
@@ -42,7 +42,7 @@ FLAGS_BNS =  $(MLX_BNS) -Wall -Wextra -Werror -g
 
 LIBDIR_BNS = bonus/libft
 LIBFT_BNS = -I$(LIBDIR_BNS) -L$(LIBDIR_BNS) -lft
-BNAME = cub3d_bonus
+BNAME = cub3D_bonus
 BNS_INCLUDES = bonus/g_col/g_collector_bonus.h bonus/gnl/get_next_line.h bonus/includes/cub3d_bonus.h bonus/libft/libft.h
 BNS_SRC = bonus/cub3d_bonus.c bonus/g_col/g_collector_bonus.c bonus/gnl/get_next_line.c bonus/gnl/get_next_line_utils.c \
 		bonus/hooks/hooks_bonus.c bonus/mouvements/movments_bonus.c bonus/parsing/parse00_bonus.c bonus/parsing/parse01_bonus.c \
