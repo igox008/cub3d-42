@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 08:20:06 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/18 21:11:59 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:18:58 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ bool	check_line(char **map, int y, t_game *game)
 			&& (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
 			|| map[y][x + 1] == ' ' || map[y][x - 1] == ' '))
 			return (false);
-		if (map[y][x] != '1' && map[y][x] != ' ' && map[y][x] != '0')
+		if (map[y][x] != '1' && map[y][x] != ' ' 
+			&& map[y][x] != '0' && map[y][x] != 'D')
 			game->p_view = map[y][x];
 	}
 	return (true);

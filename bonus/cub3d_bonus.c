@@ -6,19 +6,16 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:13 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/18 23:43:38 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:48:52 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d_bonus.h"
 
-void	f(){system("leaks cub3d_bonus");}
-
 int	main(int ac, char **av)
 {
 	t_game	game;
 
-	atexit(f);
 	innit_data(&game);
 	if (ac != 2)
 		return (ft_putendl_fd("ERROR", 2), 1);

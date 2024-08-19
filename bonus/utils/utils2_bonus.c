@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 00:08:56 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/18 23:36:40 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:43:30 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ bool	mlx_engine(t_game *game)
 	draw_txttr(game->plyr_img, game->fp, game);
 	print_pos(game);
 	mlx_image_to_window(game->mlx, game->mini_map->img, 0, 0);
+	game->angle_view = get_view(game->p_view);
 	return (true);
 }
 
