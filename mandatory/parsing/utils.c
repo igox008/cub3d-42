@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/18 23:53:13 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/19 09:43:05 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	set_p_pos(t_corr *p, char **map)
 		{
 			if (map[y][x] != '1'
 				&& map[y][x] != ' '
-				&& map[y][x] != '0')
+				&& map[y][x] != '0'
+				&& map[y][x] != 'D')
 			{
 				p->y = y * TILE_SIZE;
 				p->x = x * TILE_SIZE;
