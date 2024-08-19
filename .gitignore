@@ -3,5 +3,5 @@
 *.tldr
 test.c
 a.out
-*.a
+libft.a
 cub3d
