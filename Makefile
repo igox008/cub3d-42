@@ -21,8 +21,8 @@ CC = cc
 RM = rm -rf
 
 MLX_MAND = mandatory/MLX42/build/libmlx42.a  -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
-OFLAGS_MAND = -Ofast -Wall -Wextra -Werror -g
-FLAGS_MAND =  $(MLX_MAND) -Wall -Wextra -Werror -g
+OFLAGS_MAND = -Ofast -Wall -Wextra -Werror 
+FLAGS_MAND =  $(MLX_MAND) -Wall -Wextra -Werror 
 
 LIBDIR_MAND = mandatory/libft
 LIBFT_MAND = -I$(LIBDIR_MAND) -L$(LIBDIR_MAND) -lft
@@ -37,8 +37,8 @@ MAND_SRC = mandatory/cub3d.c mandatory/g_col/g_collector.c mandatory/gnl/get_nex
 MAND_OBJ = $(MAND_SRC:.c=.o)
 
 MLX_BNS = bonus/MLX42/build/libmlx42.a  -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
-OFLAGS_BNS = -Ofast -Wall -Wextra -Werror -g
-FLAGS_BNS =  $(MLX_BNS) -Wall -Wextra -Werror -g
+OFLAGS_BNS = -Ofast -Wall -Wextra -Werror
+FLAGS_BNS =  $(MLX_BNS) -Wall -Wextra -Werror
 
 LIBDIR_BNS = bonus/libft
 LIBFT_BNS = -I$(LIBDIR_BNS) -L$(LIBDIR_BNS) -lft
@@ -94,7 +94,6 @@ make_libft_mand :
 
 make_libft_bns :
 	@make -C bonus/libft/
-
 
 re : fclean all
 

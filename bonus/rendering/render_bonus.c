@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 21:06:54 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 22:43:47 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:15:18 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,6 @@ void	draw_texture(t_game *g, int x, int y_start, int y_end)
 		mlx_put_pixel(g->img->img, x, v.y, get_img(g, ray).pxls[color_idx]);
 		v.y++;
 	}
-}
-
-bool	print_pos(t_game *game)
-{
-	char	*pos;
-	char	*x;
-	char	*y;
-
-	x = ft_itoa((int)game->p_pos.x);
-	(x) && (y = ft_itoa((int)game->p_pos.y));
-	if (!x || !y)
-		return (g_malloc(0, FREE_S), false);
-	pos = ft_strjoin("x : ", x, MALLOC_S);
-	(pos) && (pos = ft_strjoin(pos, ", y : ", MALLOC_S));
-	(pos) && (pos = ft_strjoin(pos, y, MALLOC_S));
-	if (!pos)
-		return (g_malloc(0, FREE_S), false);
-	game->text = mlx_put_string(game->mlx, pos, 0, HEIGHT - 30);
-	if (!game->text)
-		return (g_malloc(0, FREE_S), false);
-	g_malloc(0, FREE_S);
-	return (true);
 }
 
 int	render_ray(t_rays_ *ray, t_game *game, int i)

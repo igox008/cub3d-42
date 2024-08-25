@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 09:21:38 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:27:24 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ typedef struct s_var_hor
 # define R 124
 # define L 123
 # define TILE_SIZE 320
-# define SPD 30
+# define SPD 50
 # define PRPL 0x800080
 # define BLUE 0x0000FF
 # define GRAY 0x808080
@@ -259,6 +259,5 @@ void			mouse_hook(mouse_key_t button, action_t action, \
 modifier_key_t mods, void *param);
 int				set_bool(t_game *game, bool set, bool *org);
 bool			get_bool(t_game *game, bool *get);
-bool			print_pos(t_game *game);
-
+char			*get_path(char *line);
 #endif

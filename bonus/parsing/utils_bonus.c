@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 10:42:02 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:05:37 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	mdl_line(char *s)
 	while (s && *s && *s == ' ')
 		s++;
 	if (*s == '\0')
-		return (true);
+		return (false);
 	else if (*s != '1')
 		return (false);
 	i = ft_strlen(s) - 1;
@@ -73,4 +73,28 @@ bool	mdl_line(char *s)
 	if (s[i] != '1')
 		return (false);
 	return (true);
+}
+
+char	*get_path(char *line)
+{
+	int		i;
+	char	*tmp;
+
+	line = till_char(line + 2);
+	if (!line || count_w(line, " ") != 1)
+	{
+		(1) && (g_malloc(0, FREE), g_malloc(0, FREE_S));
+		ft_putendl_fd("ERROR", 2);
+		return (exit(1), NULL);
+	}
+	i = ft_strlen(line) - 1;
+	while (line[i] == ' ' && i >= 0)
+		i--;
+	if (line[i] != ' ')
+		i++;
+	line[i] = '\0';
+	tmp = ft_strdup(line, MALLOC);
+	if (!tmp)
+		return (NULL);
+	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 02:06:38 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/18 20:35:21 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:02:50 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	parse_rgb(char **arr, char *line, t_rgb *rgb)
 
 	if (rgb->set)
 		return (false);
-	if (!arr || cnt_c(line, ',') != 2)
+	if (!arr || cnt_c(line, ',') != 2 || count_w(line, ",") != 3)
 		return (false);
 	i = -1;
 	while (arr[++i])

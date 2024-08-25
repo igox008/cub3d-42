@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 00:05:24 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 09:21:27 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:26:40 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,6 @@ void	driver(void *ptr)
 	else
 		render_map(game, game->mini_map, game->v);
 	cast_all_rays(game, game->data);
-	if (game->text)
-	{
-		mlx_delete_image(game->mlx, game->text);
-		print_pos(game);
-	}
 	if (game->hayad)
 		animate_manjal(game);
 }

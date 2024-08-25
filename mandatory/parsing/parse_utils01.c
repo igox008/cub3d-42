@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 05:53:49 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 22:34:12 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:00:20 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	is_valid_rgb(int rgb, char *s)
 {
 	if (rgb > 255 || rgb < 0)
 		return (false);
-	else if (ft_intlen(s) > 3)
+	else if (!s || ft_intlen(s) > 3)
 		return (false);
 	return (true);
 }

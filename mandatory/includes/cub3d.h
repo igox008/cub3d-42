@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:39:07 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/18 20:18:30 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:56:23 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,5 +217,6 @@ bool			innit_txtrs(t_game *game);
 void			driver(void *ptr);
 void			draw_txttr(mlx_image_t *img, mlx_texture_t *m, t_game *g);
 mlx_texture_t	*load_txtr(char *path);
+char			*get_path(char *line);
 
 #endif

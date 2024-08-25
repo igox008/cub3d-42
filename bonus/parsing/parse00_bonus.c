@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:44:31 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 10:00:36 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:16:59 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*skip_empty(int fd)
 	ret = get_next_line(fd);
 	while (ret)
 	{
+		while (ret && *ret == ' ')
+			ret++;
 		if (ft_strcmp(ret, "\n"))
 			break ;
 		ret = get_next_line(fd);

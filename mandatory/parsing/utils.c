@@ -6,7 +6,7 @@
 /*   By: alaassir <alaassir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:43:27 by alaassir          #+#    #+#             */
-/*   Updated: 2024/08/19 10:41:45 by alaassir         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:34:38 by alaassir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	mdl_line(char *s)
 	while (s && *s && *s == ' ')
 		s++;
 	if (*s == '\0')
-		return (true);
+		return (false);
 	else if (*s != '1')
 		return (false);
 	i = ft_strlen(s) - 1;
