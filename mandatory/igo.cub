@@ -3,7 +3,7 @@ SO ./mandatory/textures/wall.png
 WE ./mandatory/textures/wall.png
 EA ./mandatory/textures/wall.png
 
-F 112,128,
+F 112,128,124
 C 135,206,235
 
 111111111111
