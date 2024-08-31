@@ -29,7 +29,7 @@
    ```bash
    cd cub3d-42
    ```
-3. Compile the project:
+3. Compile the project:<br>
    for Mandatory :
    ```bash
    make
